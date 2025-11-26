@@ -1,0 +1,39 @@
+# Visual Studio folders and settings
+.vs/
+*.user
+*.suo
+*.cache
+*.dbmdl
+
+# Build folders
+bin/
+obj/
+Debug/
+Release/
+x64/
+x86/
+
+# NuGet packages
+packages/
+*.nupkg
+
+# Logs and temp files
+*.log
+*.tmp
+
+# Database auto-generated files
+*.mdf
+*.ldf
+
+
+
+# System files
+Thumbs.db
+Desktop.ini
+
+# Ignore publish output
+*.publish.xml
+
+# ReSharper / Rider
+_ReSharper*/
+*.DotSettings.user
