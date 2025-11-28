@@ -11,26 +11,26 @@ namespace Business_Layer
 {
     public class clsPerson
     {
-        enum enMode { Addnew, Update}
-        private int PersonID { get; set; }
-        private string NationalNo { get; set; }
-        private string FirstName { get; set; }
-        private string SecondName { get; set; }
-        private string ThirdName { get; set; }
-        private string LastName { get; set; }
-        private DateTime DateOfBirth { get; set; }
-        private bool Gender { get; set; }
-        private string Address { get; set; }
-        private string Phone { get; set; }
-        private string Email { get; set; }
-        private int NationalityNumberID { get; set; }
-        private string ImagePath { get; set; }
-        private enMode Mode;
+        public enum enMode { Addnew, Update}
+        public int PersonID { get; set; }
+        public string NationalNo { get; set; }
+        public string FirstName { get; set; }
+        public string SecondName { get; set; }
+        public string ThirdName { get; set; }
+        public string LastName { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public bool Gender { get; set; }
+        public string Address { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
+        public int NationalityCountryID { get; set; }
+        public string ImagePath { get; set; }
+        public enMode Mode;
 
         public clsPerson(int PersonID, string NationalNo, string FirstName,
             string SecondName, string ThirdName, string LastName, DateTime DateOfBirth,
             bool Gender, string Address, string Phone, string Email
-            , int NationalityNumberID, string ImagePath)
+            , int NationalityCountryID, string ImagePath)
         {
             this.PersonID = PersonID;
             this.NationalNo = NationalNo;
@@ -43,7 +43,7 @@ namespace Business_Layer
             this.Address = Address;
             this.Phone = Phone;
             this.Email = Email;
-            this.NationalityNumberID = NationalityNumberID;
+            this.NationalityCountryID = NationalityCountryID;
             this.ImagePath = ImagePath;
             this.Mode = enMode.Update;
         }
@@ -61,7 +61,7 @@ namespace Business_Layer
             this.Address = string.Empty;
             this.Phone = string.Empty;
             this.Email = string.Empty;
-            this.NationalityNumberID = -1;
+            this.NationalityCountryID = -1;
             this.ImagePath = string.Empty;
             this.Mode = enMode.Addnew;
         }
@@ -79,18 +79,18 @@ namespace Business_Layer
             string Address = string.Empty;
             string Phone = string.Empty;
             string Email = string.Empty;
-            int NationalityNumberID = -1;
+            int NationalityCountryID = -1;
             string ImagePath = string.Empty;
 
             if (clsPeopleDataAccess.FindPersonWithPersonID(PersonID, ref NationalNo, ref FirstName,
             ref SecondName, ref ThirdName, ref LastName, ref DateOfBirth,
             ref Gender, ref Address, ref Phone, ref Email
-            , ref NationalityNumberID, ref ImagePath))
+            , ref NationalityCountryID, ref ImagePath))
 
                 return new clsPerson(PersonID, NationalNo, FirstName,
              SecondName, ThirdName, LastName, DateOfBirth,
              Gender, Address, Phone, Email,
-             NationalityNumberID, ImagePath);
+             NationalityCountryID, ImagePath);
 
             else
                 return null;
@@ -112,11 +112,17 @@ namespace Business_Layer
             return clsPeopleDataAccess.IsPersonExist(PersonID);
         }
 
+        public static bool IsPersonExist(string NationalNo)
+        {
+            return clsPeopleDataAccess.IsPersonExist(NationalNo);
+        }
+
+
         private bool _AddNewPerson()
         {
             this.PersonID = clsPeopleDataAccess.AddNewPerson(this.NationalNo, this.FirstName, this.SecondName,
                 this.ThirdName, this.LastName, this.DateOfBirth, this.Gender, this.Address, this.Phone, this.Email
-                , this.NationalityNumberID, this.ImagePath);
+                , this.NationalityCountryID, this.ImagePath);
             return (this.PersonID != -1);
         }
 
@@ -124,7 +130,7 @@ namespace Business_Layer
         {
             return (clsPeopleDataAccess.UpdatePerson(this.PersonID, this.NationalNo, this.FirstName, this.SecondName,
                 this.ThirdName, this.LastName, this.DateOfBirth, this.Gender, this.Address, this.Phone, this.Email
-                , this.NationalityNumberID, this.ImagePath));
+                , this.NationalityCountryID, this.ImagePath));
         }
 
         public bool Save()

@@ -13,7 +13,7 @@ namespace DataAccess_Layer
         static public bool FindPersonWithPersonID(int PersonID,ref string NationalNo, ref string FirstName,
             ref string SecondName, ref string ThirdName, ref string LastName, ref DateTime DateOfBirth,
             ref bool Gender, ref string Address, ref string Phone, ref string Email
-            , ref int NationalityNumberID, ref string ImagePath)
+            , ref int NationalityCountryID, ref string ImagePath)
         {
                 bool IsFound = false;
             try
@@ -41,7 +41,7 @@ namespace DataAccess_Layer
                                 Address = reader["Address"].ToString();
                                 Phone = reader["Phone"].ToString();
                                 Email = reader["email"].ToString();
-                                NationalityNumberID = (int)reader["NationalityNumberID"];
+                                NationalityCountryID = (int)reader["NationalityCountryID"];
                                 if (reader["ImagePath"] != DBNull.Value)
                                     ImagePath = reader["ImagePath"].ToString();
                                 else
@@ -64,7 +64,7 @@ namespace DataAccess_Layer
         static public int AddNewPerson(string NationalNo, string FirstName,
             string SecondName, string ThirdName, string LastName, DateTime DateOfBirth,
             bool Gender, string Address, string Phone, string Email
-            , int NationalityNumberID, string ImagePath)
+            , int NationalityCountryID, string ImagePath)
         {
             int PersonID = -1;
             try
@@ -73,9 +73,9 @@ namespace DataAccess_Layer
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
                     string query = @"INSERT INTO People (NationalNo,FirstName,SecondName,ThirdName,
-                    LastName,Email,Phone,Address,DateOfBirth,Gender,NationalityNumberID,ImagePath)     
+                    LastName,Email,Phone,Address,DateOfBirth,Gender,NationalityCountryID,ImagePath)     
                     values (@NationalNo,@FirstName,@SecondName,@ThirdName,@LastName,@Email,@Phone,
-                    @Address,@DateOfBirth,@Gender,@NationalityNumberID,@ImagePath);
+                    @Address,@DateOfBirth,@Gender,@NationalityCountryID,@ImagePath);
                     SELECT SCOPE_IDENTITY();";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
@@ -90,7 +90,7 @@ namespace DataAccess_Layer
                         command.Parameters.AddWithValue("@Address", Address);
                         command.Parameters.AddWithValue("@DateOfBirth", DateOfBirth);
                         command.Parameters.AddWithValue("@Gender", Gender);
-                        command.Parameters.AddWithValue("@NationalityNumberID", NationalityNumberID);
+                        command.Parameters.AddWithValue("@NationalityCountryID", NationalityCountryID);
                         if (ImagePath != string.Empty)
                             command.Parameters.AddWithValue("@ImagePath", ImagePath);
                         else
@@ -120,7 +120,7 @@ namespace DataAccess_Layer
         static public bool UpdatePerson(int PersonID, string NationalNo, string FirstName,
             string SecondName, string ThirdName, string LastName, DateTime DateOfBirth,
             bool Gender, string Address, string Phone, string Email
-            , int NationalityNumberID, string ImagePath)
+            , int NationalityCountryID, string ImagePath)
         {
             int RowsAffected = 0;
             try
@@ -130,7 +130,7 @@ namespace DataAccess_Layer
                     string query = @"UPDATE People SET NationalNo = @NationalNo, FirstName = @FirstName,
                 SecondName = @SecondName, ThirdName = @ThirdName, LastName = @LastName,
                 Email = @Email, Phone = @Phone, Address = @Address, DateOfBirth = @DateOfBirth,
-                Gender = @Gender, NationalityNumberID = @NationalityNumberID, ImagePath = @ImagePath
+                Gender = @Gender, NationalityCountryID = @NationalityCountryID, ImagePath = @ImagePath
                 WHERE PersonID = @PersonID";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
@@ -145,7 +145,7 @@ namespace DataAccess_Layer
                         command.Parameters.AddWithValue("@Address", Address);
                         command.Parameters.AddWithValue("@DateOfBirth", DateOfBirth);
                         command.Parameters.AddWithValue("@Gender", Gender);
-                        command.Parameters.AddWithValue("@NationalityNumberID", NationalityNumberID);
+                        command.Parameters.AddWithValue("@NationalityCountryID", NationalityCountryID);
                         if (ImagePath != string.Empty)
                             command.Parameters.AddWithValue("@ImagePath", ImagePath);
                         else
@@ -250,6 +250,37 @@ namespace DataAccess_Layer
             }
 
         }
+
+        public static bool IsPersonExist(string NationalNo)
+        {
+            try
+            {
+
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                {
+                    string query = "SELECT found = 1 FROM People WHERE NationalNo = @NationalNo";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@NationalNo", NationalNo);
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                return true;
+                            }
+                            return false;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+        }
+
 
     }
 }
