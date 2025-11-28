@@ -12,7 +12,7 @@ namespace DataAccess_Layer
     {
         static public bool FindPersonWithPersonID(int PersonID,ref string NationalNo, ref string FirstName,
             ref string SecondName, ref string ThirdName, ref string LastName, ref DateTime DateOfBirth,
-            ref bool Gender, ref string Address, ref string Phone, ref string Email
+            ref byte Gender, ref string Address, ref string Phone, ref string Email
             , ref int NationalityCountryID, ref string ImagePath)
         {
                 bool IsFound = false;
@@ -37,7 +37,7 @@ namespace DataAccess_Layer
                                 ThirdName = reader["ThirdName"].ToString();
                                 LastName = reader["LastName"].ToString();
                                 DateOfBirth = (DateTime)reader["DateOfBirth"];
-                                Gender = (bool)reader["Gender"];
+                                Gender = (byte)reader["Gender"];
                                 Address = reader["Address"].ToString();
                                 Phone = reader["Phone"].ToString();
                                 Email = reader["email"].ToString();
@@ -63,7 +63,7 @@ namespace DataAccess_Layer
 
         static public int AddNewPerson(string NationalNo, string FirstName,
             string SecondName, string ThirdName, string LastName, DateTime DateOfBirth,
-            bool Gender, string Address, string Phone, string Email
+            byte Gender, string Address, string Phone, string Email
             , int NationalityCountryID, string ImagePath)
         {
             int PersonID = -1;
@@ -119,7 +119,7 @@ namespace DataAccess_Layer
 
         static public bool UpdatePerson(int PersonID, string NationalNo, string FirstName,
             string SecondName, string ThirdName, string LastName, DateTime DateOfBirth,
-            bool Gender, string Address, string Phone, string Email
+            byte Gender, string Address, string Phone, string Email
             , int NationalityCountryID, string ImagePath)
         {
             int RowsAffected = 0;
@@ -135,6 +135,7 @@ namespace DataAccess_Layer
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
+                        command.Parameters.AddWithValue("@PersonID", PersonID);
                         command.Parameters.AddWithValue("@NationalNo", NationalNo);
                         command.Parameters.AddWithValue("@FirstName", FirstName);
                         command.Parameters.AddWithValue("@SecondName", SecondName);

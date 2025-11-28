@@ -16,7 +16,7 @@ namespace Presentation_Layer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmManagePeopleList());
+            Application.Run(new frmMain());
         }
     }
 }

@@ -15,25 +15,31 @@ namespace Presentation_Layer
 {
     public partial class frmAddEditPerson : Form
     {
-        public frmAddEditPerson()
+        public frmAddEditPerson(int personID)
         {
             InitializeComponent();
+            PersonID = personID;
+
+            if (PersonID == -1)
+                _Mode = enMode.AddNew;
+            else
+                _Mode = enMode.Update;
         }
 
-        public int PersonID { get; set; }
+        private int PersonID;
         public enum enMode { AddNew, Update };
         private enMode _Mode;
-        clsPerson _Person;
+        private clsPerson _Person;
 
 
         private void _LoadData()
         {
             dateTimePicker1.MaxDate = DateTime.Now.AddYears(-18);
             _FillCountriesInComboBox();
-            rbMale.Checked = true;
             if (_Mode == enMode.AddNew)
             {
                 lblAddEditPerson.Text = "Add New Person";
+                rbMale.Checked = true;
                 _Person = new clsPerson();
                 return;
             }
@@ -48,7 +54,8 @@ namespace Presentation_Layer
             }
 
             lblAddEditPerson.Text = "Update Person";
-            lblPersonID.Text = _Person.ToString();
+            lblPersonID.Text = _Person.PersonID.ToString();
+            txtNationalNo.Text = _Person.NationalNo.ToString();
             txtFirstName.Text = _Person.FirstName;
             txtSecondName.Text = _Person.SecondName;
             txtThirdName.Text = _Person.ThirdName;
@@ -57,6 +64,11 @@ namespace Presentation_Layer
             txtPhone.Text = _Person.Phone;
             txtAddress.Text = _Person.Address;
             dateTimePicker1.Value = _Person.DateOfBirth;
+
+            if (_Person.Gender == 0)
+                rbMale.Checked = true;
+            else
+                rbMale.Checked = true;
 
             if (_Person.ImagePath != string.Empty)
                 pbPerson.Load(_Person.ImagePath);
@@ -164,9 +176,9 @@ namespace Presentation_Layer
             _Person.NationalityCountryID = (clsCountry.Find(cmbCountries.Text)).CountryID;
 
             if (rbFemale.Checked)
-                _Person.Gender = false;
+                _Person.Gender = 0;
             else
-                _Person.Gender = true;
+                _Person.Gender = 1;
 
             if (pbPerson.ImageLocation != null)
                 _Person.ImagePath = pbPerson.ImageLocation;
@@ -204,5 +216,7 @@ namespace Presentation_Layer
         {
             this.Close();
         }
+
+
     }
 }
