@@ -25,6 +25,7 @@ namespace Presentation_Layer
                 clsPerson.DeletePerson(_PersonID);
             else 
                 this.Close();
+            this.Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Business_Layer;
+using Presentation_Layer.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,14 +9,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Business_Layer;
 
 namespace Presentation_Layer
 {
     public partial class ctrlPersonCard : UserControl
     {
-        public int PersonID { get; set; }
-        clsPerson _Person;
+        private int _PersonID = -1;
+        private clsPerson _Person;
+
+        public int PersonID
+        {
+            get { return _PersonID; }
+        }
+
+        public clsPerson SelectedPersonInfo
+        {
+            get { return _Person; }
+        }
+
         public ctrlPersonCard()
         {
             InitializeComponent();
@@ -22,16 +34,16 @@ namespace Presentation_Layer
 
         private void _LoadDataToPersonCard(int perosnID)
         {
-            this.PersonID = perosnID;
+            this._PersonID = perosnID;
 
-            if (this.PersonID == -1)
+            if (this._PersonID == -1)
             {
                 _Person = null;
                 MessageBox.Show("This Person Is NOT exist");
                 return;
             }
 
-            _Person = clsPerson.FindPerson(this.PersonID);
+            _Person = clsPerson.FindPerson(this._PersonID);
             if (_Person == null)
             {
                 MessageBox.Show("This Person Is NOT exist");
@@ -50,13 +62,9 @@ namespace Presentation_Layer
             lblEmail.Text = _Person.Email.ToString();
             lblAddress.Text = _Person.Address.ToString();
             lblDateOfBirth.Text = DateOfBirth;
+            lblGender.Text = _Person.Gender == 0 ? "Male" : "Female";
             lblPhone.Text = _Person.Phone.ToString();
             lblCountry.Text = CountryName;
-
-            if (_Person.Gender == 0)
-                lblGender.Text = "Male";
-            else
-                lblGender.Text = "Female";
 
             if (_Person.ImagePath != string.Empty)
                 pbPerson.Image = Image.FromFile(_Person.ImagePath);
@@ -71,6 +79,22 @@ namespace Presentation_Layer
         public void ReceivePersonIDFromForm(int  personID)
         {
             _LoadDataToPersonCard(personID);
+        }
+
+        public void ResetPersonInfo()
+        {
+            _PersonID = -1;
+            lblPersonID.Text = "[????]";
+            lblNationalNo.Text = "[????]";
+            lblName.Text = "[????]";
+            lblGender.Text = "[????]";
+            lblEmail.Text = "[????]";
+            lblPhone.Text = "[????]";
+            lblDateOfBirth.Text = "[????]";
+            lblCountry.Text = "[????]";
+            lblAddress.Text = "[????]";
+            pbPerson.Image = Resources.Male_512;
+
         }
 
         private void lnlEditPersonInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

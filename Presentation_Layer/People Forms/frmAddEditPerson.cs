@@ -9,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Presentation_Layer
 {
@@ -26,7 +25,7 @@ namespace Presentation_Layer
                 _Mode = enMode.Update;
         }
 
-        private int PersonID;
+        private int PersonID = -1;
         public enum enMode { AddNew, Update };
         private enMode _Mode;
         private clsPerson _Person;
@@ -68,7 +67,7 @@ namespace Presentation_Layer
             if (_Person.Gender == 0)
                 rbMale.Checked = true;
             else
-                rbMale.Checked = true;
+                rbFemale.Checked = true;
 
             if (_Person.ImagePath != string.Empty)
                 pbPerson.Load(_Person.ImagePath);
@@ -164,6 +163,15 @@ namespace Presentation_Layer
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (!this.ValidateChildren())
+            {
+                //Here we dont continue becuase the form is not valid
+                MessageBox.Show("Some fileds are not valide!, put the mouse over the red icon(s) to see the erro", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+
+            }
+
+
             _Person.NationalNo = txtNationalNo.Text;
             _Person.FirstName = txtFirstName.Text;
             _Person.SecondName = txtSecondName.Text;
@@ -208,15 +216,29 @@ namespace Presentation_Layer
 
         private void rbFemale_CheckedChanged(object sender, EventArgs e)
         {
-            pbPerson.Image = Properties.Resources.Female_512;
+                pbPerson.Image = Properties.Resources.Female_512;
         }
-
 
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        private void ValidateEmptyTextBox(object sender, CancelEventArgs e)
+        {
+            TextBox Temp = ((TextBox)sender);
+            if (string.IsNullOrEmpty(Temp.Text.Trim()))
+            {
+                e.Cancel = true;
+                errEmptyTextBox.SetError(Temp, "This field is required!");
+            }
+            else
+            {
+                //e.Cancel = false;
+                errEmptyTextBox.SetError(Temp, null);
+            }
 
+
+        }
     }
 }

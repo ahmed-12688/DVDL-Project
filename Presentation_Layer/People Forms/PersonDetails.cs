@@ -12,18 +12,13 @@ namespace Presentation_Layer
 {
     public partial class frmPersonDetails : Form
     {
-        private int _PersonID;
         
         public frmPersonDetails(int PersonID)
         {
             InitializeComponent();
-            this._PersonID = PersonID;
+            ctrlPersonCard1.ReceivePersonIDFromForm(PersonID);
         }
 
-        private void frmPersonDetails_Load(object sender, EventArgs e)
-        {
-            ctrlPersonCard1.ReceivePersonIDFromForm(_PersonID);
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {

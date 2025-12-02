@@ -76,6 +76,7 @@
             this.errNationalNo = new System.Windows.Forms.ErrorProvider(this.components);
             this.errEmail = new System.Windows.Forms.ErrorProvider(this.components);
             this.ofdSetImage = new System.Windows.Forms.OpenFileDialog();
+            this.errEmptyTextBox = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPerson)).BeginInit();
@@ -91,6 +92,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errNationalNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errEmail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errEmptyTextBox)).BeginInit();
             this.SuspendLayout();
             // 
             // lblAddEditPerson
@@ -381,6 +383,7 @@
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(139, 22);
             this.txtPhone.TabIndex = 61;
+            this.txtPhone.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateEmptyTextBox);
             // 
             // txtAddress
             // 
@@ -389,7 +392,7 @@
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(413, 88);
             this.txtAddress.TabIndex = 60;
-            this.txtAddress.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmail_Validating);
+            this.txtAddress.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateEmptyTextBox);
             // 
             // txtEmail
             // 
@@ -453,6 +456,7 @@
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(127, 22);
             this.txtLastName.TabIndex = 53;
+            this.txtLastName.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateEmptyTextBox);
             // 
             // txtThirdName
             // 
@@ -460,6 +464,7 @@
             this.txtThirdName.Name = "txtThirdName";
             this.txtThirdName.Size = new System.Drawing.Size(139, 22);
             this.txtThirdName.TabIndex = 52;
+            this.txtThirdName.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateEmptyTextBox);
             // 
             // txtSecondName
             // 
@@ -467,6 +472,7 @@
             this.txtSecondName.Name = "txtSecondName";
             this.txtSecondName.Size = new System.Drawing.Size(139, 22);
             this.txtSecondName.TabIndex = 51;
+            this.txtSecondName.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateEmptyTextBox);
             // 
             // txtFirstName
             // 
@@ -474,6 +480,7 @@
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(139, 22);
             this.txtFirstName.TabIndex = 50;
+            this.txtFirstName.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateEmptyTextBox);
             // 
             // pictureBox5
             // 
@@ -582,6 +589,10 @@
             // 
             this.ofdSetImage.FileName = "openFileDialog1";
             // 
+            // errEmptyTextBox
+            // 
+            this.errEmptyTextBox.ContainerControl = this;
+            // 
             // frmAddEditPerson
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -612,6 +623,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errNationalNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errEmail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errEmptyTextBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -665,5 +677,6 @@
         private System.Windows.Forms.ErrorProvider errNationalNo;
         private System.Windows.Forms.ErrorProvider errEmail;
         private System.Windows.Forms.OpenFileDialog ofdSetImage;
+        private System.Windows.Forms.ErrorProvider errEmptyTextBox;
     }
 }

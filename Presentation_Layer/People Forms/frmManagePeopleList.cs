@@ -163,7 +163,7 @@ namespace Presentation_Layer
             switch (cbFilterPeople.Text)
             {
                 case "Person ID":
-                    FilterColumn = "PersonID";
+                    FilterColumn = "_PersonID";
                     break;
 
                 case "National No":
@@ -218,7 +218,7 @@ namespace Presentation_Layer
             }
 
 
-            if (FilterColumn == "PersonID")
+            if (FilterColumn == "_PersonID")
                 _dtPeople.DefaultView.RowFilter = string.Format($"[{FilterColumn}] = {txtFilterPeople.Text.Trim()}");
             else
                 _dtPeople.DefaultView.RowFilter = string.Format($"[{FilterColumn}] LIKE '{txtFilterPeople.Text.Trim()}%'");
