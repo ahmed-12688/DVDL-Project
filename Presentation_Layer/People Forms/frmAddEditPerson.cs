@@ -175,7 +175,7 @@ namespace Presentation_Layer
             _Person.DateOfBirth = dateTimePicker1.Value;
             _Person.NationalityCountryID = (clsCountry.Find(cmbCountries.Text)).CountryID;
 
-            if (rbFemale.Checked)
+            if (rbMale.Checked)
                 _Person.Gender = 0;
             else
                 _Person.Gender = 1;

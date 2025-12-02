@@ -205,7 +205,7 @@
             // btnSave
             // 
             this.btnSave.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Image = global::Presentation_Layer.Properties.Resources.Save_32;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -220,7 +220,7 @@
             // btnClose
             // 
             this.btnClose.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.Image = global::Presentation_Layer.Properties.Resources.Close_32;
             this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;

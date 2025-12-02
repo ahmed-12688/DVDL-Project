@@ -10,23 +10,23 @@ namespace DataAccess_Layer
 {
     public class clsPeopleDataAccess
     {
-        static public bool FindPersonWithPersonID(int PersonID,ref string NationalNo, ref string FirstName,
+        static public bool FindPersonWithPersonID(int PersonID, ref string NationalNo, ref string FirstName,
             ref string SecondName, ref string ThirdName, ref string LastName, ref DateTime DateOfBirth,
             ref byte Gender, ref string Address, ref string Phone, ref string Email
             , ref int NationalityCountryID, ref string ImagePath)
         {
-                bool IsFound = false;
+            bool IsFound = false;
             try
             {
-                using(SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
                     string query = "SELECT * FROM People WHERE PersonID = @PersonID";
-                    using (SqlCommand command = new SqlCommand(query, connection)) 
+                    using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         connection.Open();
                         command.Parameters.AddWithValue("@PersonID", PersonID);
 
-                        using(SqlDataReader reader = command.ExecuteReader())
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.Read())
                             {
@@ -56,7 +56,7 @@ namespace DataAccess_Layer
             catch (Exception)
             {
 
-                IsFound=false;
+                IsFound = false;
             }
             return IsFound;
         }
@@ -152,7 +152,7 @@ namespace DataAccess_Layer
                         else
                             command.Parameters.AddWithValue("@ImagePath", DBNull.Value);
 
-                                
+
                         connection.Open();
                         RowsAffected = command.ExecuteNonQuery();
                     }
@@ -201,7 +201,23 @@ namespace DataAccess_Layer
 
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
-                    string query = "SELECT * FROM People";
+
+                    string query =
+                      @"SELECT People.PersonID, People.NationalNo,
+              People.FirstName, People.SecondName, People.ThirdName, People.LastName,
+			  People.DateOfBirth, People.Gender,  
+				  CASE
+                  WHEN People.Gender = 0 THEN 'Male'
+
+                  ELSE 'Female'
+
+                  END as GenderCaption ,
+			  People.Address, People.Phone, People.Email, 
+              People.NationalityCountryID, Countries.CountryName, People.ImagePath
+              FROM            People INNER JOIN
+                         Countries ON People.NationalityCountryID = Countries.CountryID
+                ORDER BY People.FirstName
+";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         connection.Open();
