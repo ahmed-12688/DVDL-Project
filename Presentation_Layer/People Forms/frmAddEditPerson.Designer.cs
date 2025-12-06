@@ -35,7 +35,7 @@
             this.lblPersonID = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lnlRemoveImage = new System.Windows.Forms.LinkLabel();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.lnlSetImage = new System.Windows.Forms.LinkLabel();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.pbPerson = new System.Windows.Forms.PictureBox();
@@ -139,7 +139,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.lnlRemoveImage);
-            this.groupBox1.Controls.Add(this.linkLabel2);
+            this.groupBox1.Controls.Add(this.lnlSetImage);
             this.groupBox1.Controls.Add(this.btnSave);
             this.groupBox1.Controls.Add(this.btnClose);
             this.groupBox1.Controls.Add(this.pbPerson);
@@ -192,17 +192,17 @@
             this.lnlRemoveImage.Visible = false;
             this.lnlRemoveImage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnlRemoveImage_LinkClicked);
             // 
-            // linkLabel2
+            // lnlSetImage
             // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel2.Location = new System.Drawing.Point(660, 247);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(84, 20);
-            this.linkLabel2.TabIndex = 74;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "Set Image";
-            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
+            this.lnlSetImage.AutoSize = true;
+            this.lnlSetImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lnlSetImage.Location = new System.Drawing.Point(660, 247);
+            this.lnlSetImage.Name = "lnlSetImage";
+            this.lnlSetImage.Size = new System.Drawing.Size(84, 20);
+            this.lnlSetImage.TabIndex = 74;
+            this.lnlSetImage.TabStop = true;
+            this.lnlSetImage.Text = "Set Image";
+            this.lnlSetImage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnlSetimage_LinkClicked);
             // 
             // btnSave
             // 
@@ -221,6 +221,7 @@
             // 
             // btnClose
             // 
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -595,8 +596,10 @@
             // 
             // frmAddEditPerson
             // 
+            this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(816, 483);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblPersonID);
@@ -636,7 +639,7 @@
         private System.Windows.Forms.Label lblPersonID;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.LinkLabel lnlRemoveImage;
-        private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.LinkLabel lnlSetImage;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.PictureBox pbPerson;

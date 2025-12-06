@@ -26,8 +26,7 @@ namespace Presentation_Layer
 
         private void button1_Click(object sender, EventArgs e)
         {
-            frmPersonDetails frm = new frmPersonDetails(1030);
-            frm.ShowDialog();
+            
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Presentation_Layer
 {
-    partial class frmManagePeopleList
+    partial class frmListPeopleList
     {
         /// <summary>
         /// Required designer variable.

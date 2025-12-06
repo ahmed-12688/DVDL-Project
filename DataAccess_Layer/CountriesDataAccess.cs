@@ -107,66 +107,6 @@ namespace DataAccess_Layer
             return dt;
         }
 
-        public static bool IsCountryExist(int ID)
-        {
-            try
-            {
-
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
-                {
-                    string query = "SELECT found = 1 FROM Countries WHERE CountryID = @CountryID";
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("CountryID", ID);
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.HasRows)
-                            {
-                                return true;
-                            }
-                            return false;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-
-        }
-
-        public static bool IsCountryExistByName(string CountryName)
-        {
-            try
-            {
-
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
-                {
-                    string query = "SELECT found = 1 FROM Countries WHERE CountryName = @CountryName";
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("CountryName", CountryName);
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.HasRows)
-                            {
-                                return true;
-                            }
-                            return false;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-
-        }
-
 
     }
 }

@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using static Presentation_Layer.frmAddEditPerson;
 
 namespace Presentation_Layer
 {
@@ -21,7 +23,7 @@ namespace Presentation_Layer
         {
             get { return _PersonID; }
         }
-
+                
         public clsPerson SelectedPersonInfo
         {
             get { return _Person; }
@@ -32,53 +34,64 @@ namespace Presentation_Layer
             InitializeComponent();
         }
 
-        private void _LoadDataToPersonCard(int perosnID)
+        public void LoadPersonInfo(int PersonID)
         {
-            this._PersonID = perosnID;
-
-            if (this._PersonID == -1)
-            {
-                _Person = null;
-                MessageBox.Show("This Person Is NOT exist");
-                return;
-            }
-
-            _Person = clsPerson.FindPerson(this._PersonID);
+            _Person = clsPerson.FindPerson(PersonID);
             if (_Person == null)
             {
-                MessageBox.Show("This Person Is NOT exist");
+                ResetPersonInfo();
+                MessageBox.Show("No Person with PersonID = " + PersonID.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            DateTime DateOfbirth = _Person.DateOfBirth;
-            string DateOfBirth = DateOfbirth.ToShortDateString();
-            string CountryName = clsCountry.Find(_Person.NationalityCountryID).CountryName;
-            
+            _FillPersonInfo();
+        }
 
-            lblPersonID.Text = _Person.PersonID.ToString();
-            lblName.Text = ($"{_Person.FirstName.ToString()} {_Person.SecondName.ToString()}" +
-            $" {_Person.ThirdName.ToString()} {_Person.LastName.ToString()}");
-            lblNationalNo.Text = _Person.NationalNo.ToString();
-            lblEmail.Text = _Person.Email.ToString();
-            lblAddress.Text = _Person.Address.ToString();
-            lblDateOfBirth.Text = DateOfBirth;
-            lblGender.Text = _Person.Gender == 0 ? "Male" : "Female";
-            lblPhone.Text = _Person.Phone.ToString();
-            lblCountry.Text = CountryName;
+        public void LoadPersonInfo(string NationalNo)
+        {
+            _Person = clsPerson.FindPerson(NationalNo);
+            if (_Person == null)
+            {
+                ResetPersonInfo();
+                MessageBox.Show("No Person with NationalNo = " + NationalNo.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            if (_Person.ImagePath != string.Empty)
-                pbPerson.Image = Image.FromFile(_Person.ImagePath);
-            else if (_Person.Gender == 0)
-                pbPerson.Image = Properties.Resources.Male_512;
+            _FillPersonInfo();
+        }
+
+
+        private void _LoadPersonImage()
+        {
+            if (_Person.Gender == 0)
+                pbPerson.Image = Resources.Male_512;
             else
-                pbPerson.Image = Properties.Resources.Female_512;
+                pbPerson.Image = Resources.Female_512;
 
+            string ImagePath = _Person.ImagePath;
+            if (ImagePath != "")
+                if (File.Exists(ImagePath))
+                    pbPerson.ImageLocation = ImagePath;
+                else
+                    MessageBox.Show("Could not find this image: = " + ImagePath, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         }
 
-        public void ReceivePersonIDFromForm(int  personID)
+        private void _FillPersonInfo()
         {
-            _LoadDataToPersonCard(personID);
+            lnlEditPersonInfo.Enabled = true;
+            _PersonID = _Person.PersonID;
+            lblPersonID.Text = _Person.PersonID.ToString();
+            lblNationalNo.Text = _Person.NationalNo;
+            lblName.Text = ($"{_Person.FirstName.ToString()} {_Person.SecondName.ToString()}" +
+                        $" {_Person.ThirdName.ToString()} {_Person.LastName.ToString()}");
+            lblGender.Text = _Person.Gender == 0 ? "Male" : "Female";
+            lblEmail.Text = _Person.Email;
+            lblPhone.Text = _Person.Phone;
+            lblDateOfBirth.Text = _Person.DateOfBirth.ToShortDateString();
+            lblCountry.Text = clsCountry.Find(_Person.NationalityCountryID).CountryName;
+            lblAddress.Text = _Person.Address;
+            _LoadPersonImage();
         }
 
         public void ResetPersonInfo()
@@ -99,8 +112,11 @@ namespace Presentation_Layer
 
         private void lnlEditPersonInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            frmAddEditPerson frm = new frmAddEditPerson(_Person.PersonID);
+            frmAddEditPerson frm = new frmAddEditPerson(_PersonID);
             frm.ShowDialog();
+
+            //refresh
+            LoadPersonInfo(_PersonID);
         }
     }
 }

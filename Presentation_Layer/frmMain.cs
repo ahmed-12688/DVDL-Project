@@ -19,8 +19,9 @@ namespace Presentation_Layer
 
         private void peopleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmManagePeopleList frm = new frmManagePeopleList();
-            frm.ShowDialog();
+            frmListPeopleList frm = new frmListPeopleList();
+            frm.Show();
         }
+
     }
 }

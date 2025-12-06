@@ -1,10 +1,12 @@
 ﻿using Business_Layer;
+using Presentation_Layer.Global_Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics.Contracts;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +16,8 @@ namespace Presentation_Layer
 {
     public partial class frmAddEditPerson : Form
     {
+
+        public event Action<int> SentPersonIDBack;
         public frmAddEditPerson(int personID)
         {
             InitializeComponent();
@@ -27,6 +31,8 @@ namespace Presentation_Layer
 
         private int PersonID = -1;
         public enum enMode { AddNew, Update };
+        public enum enGender { Male = 0, Female = 1 };
+
         private enMode _Mode;
         private clsPerson _Person;
 
@@ -89,6 +95,54 @@ namespace Presentation_Layer
             cmbCountries.SelectedItem = "Egypt";
         }
 
+        private bool _HandlePersonImage()
+        {
+
+            //this procedure will handle the person image,
+            //it will take care of deleting the old image from the folder
+            //in case the image changed. and it will rename the new image with guid and 
+            // place it in the images folder.
+
+
+            //_Person.ImagePath contains the old Image, we check if it changed then we copy the new image
+            if (_Person.ImagePath != pbPerson.ImageLocation)
+            {
+                if (_Person.ImagePath != "")
+                {
+                    //first we delete the old image from the folder in case there is any.
+
+                    try
+                    {
+                        File.Delete(_Person.ImagePath);
+                    }
+                    catch (IOException)
+                    {
+                        // We could not delete the file.
+                        //log it later   
+                    }
+                }
+
+                if (pbPerson.ImageLocation != null)
+                {
+                    //then we copy the new image to the image folder after we rename it
+                    string SourceImageFile = pbPerson.ImageLocation.ToString();
+
+                    if (clsUtil.CopyImageToProjectImagesFolder(ref SourceImageFile))
+                    {
+                        pbPerson.ImageLocation = SourceImageFile;
+                        return true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error Copying Image File", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                }
+
+            }
+            return true;
+        }
+
         private void txtNationalNo_Validating(object sender, CancelEventArgs e)
         {
             if (string.IsNullOrEmpty(txtNationalNo.Text))
@@ -101,7 +155,7 @@ namespace Presentation_Layer
                 errNationalNo.SetError(txtNationalNo, null);
 
 
-            if (clsPerson.IsPersonExist(txtNationalNo.Text))
+            if (txtNationalNo.Text.Trim() != _Person.NationalNo && clsPerson.IsPersonExist(txtNationalNo.Text))
             {
                 txtNationalNo.Focus();
                 errNationalNo.SetError(txtNationalNo, "This National Number is already exist, take another one");
@@ -131,7 +185,7 @@ namespace Presentation_Layer
             ;
         }
 
-        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void lnlSetimage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             ofdSetImage.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp";
             ofdSetImage.FilterIndex = 1;
@@ -143,7 +197,7 @@ namespace Presentation_Layer
                 string selectedFilePath = ofdSetImage.FileName;
                 //MessageBox.Show("Selected Image is:" + selectedFilePath);
 
-                pbPerson.Load(selectedFilePath);
+                pbPerson.ImageLocation = selectedFilePath;
                 lnlRemoveImage.Visible = true;
 
             }
@@ -171,22 +225,25 @@ namespace Presentation_Layer
 
             }
 
+            if (!_HandlePersonImage())
+                return;
 
-            _Person.NationalNo = txtNationalNo.Text;
-            _Person.FirstName = txtFirstName.Text;
-            _Person.SecondName = txtSecondName.Text;
-            _Person.ThirdName = txtThirdName.Text;
-            _Person.LastName = txtLastName.Text;
-            _Person.Email = txtEmail.Text;
-            _Person.Phone = txtPhone.Text;
-            _Person.Address = txtAddress.Text;
+
+            _Person.NationalNo = txtNationalNo.Text.Trim();
+            _Person.FirstName = txtFirstName.Text.Trim();
+            _Person.SecondName = txtSecondName.Text.Trim();
+            _Person.ThirdName = txtThirdName.Text.Trim();
+            _Person.LastName = txtLastName.Text.Trim();
+            _Person.Email = txtEmail.Text.Trim();
+            _Person.Phone = txtPhone.Text.Trim();
+            _Person.Address = txtAddress.Text.Trim();
             _Person.DateOfBirth = dateTimePicker1.Value;
             _Person.NationalityCountryID = (clsCountry.Find(cmbCountries.Text)).CountryID;
 
             if (rbMale.Checked)
-                _Person.Gender = 0;
+                _Person.Gender = (byte)enGender.Male;
             else
-                _Person.Gender = 1;
+                _Person.Gender = (byte)enGender.Female;
 
             if (pbPerson.ImageLocation != null)
                 _Person.ImagePath = pbPerson.ImageLocation;
@@ -194,13 +251,19 @@ namespace Presentation_Layer
                 _Person.ImagePath = string.Empty;
 
             if (_Person.Save())
-                MessageBox.Show("Person Saved Successfully");
-            else
-                MessageBox.Show("Error : Data is NOT Saved !");
+            {
+                _Mode = enMode.Update;
+                lblAddEditPerson.Text = "Update Person";
+                lblPersonID.Text = _Person.PersonID.ToString();
 
-            _Mode = enMode.Update;
-            lblAddEditPerson.Text = "Update Person";
-            lblPersonID.Text = _Person.PersonID.ToString();
+                MessageBox.Show("Person Saved Successfully" , "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                //Delegate to sent data back to any form want to display the person
+                SentPersonIDBack?.Invoke(_Person.PersonID);
+            }
+            else
+                MessageBox.Show("Error : Data is NOT Saved !", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
 
         }
 

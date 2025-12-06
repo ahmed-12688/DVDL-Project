@@ -31,6 +31,7 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.txtTestEdit = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.ctrlPersonCardWithFilter1 = new Presentation_Layer.People_Forms.Controls.ctrlPersonCardWithFilter();
             this.SuspendLayout();
             // 
             // btnEdit
@@ -52,7 +53,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(227, 210);
+            this.button1.Location = new System.Drawing.Point(51, 217);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(132, 53);
             this.button1.TabIndex = 2;
@@ -60,11 +61,19 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // ctrlPersonCardWithFilter1
+            // 
+            this.ctrlPersonCardWithFilter1.Location = new System.Drawing.Point(398, 85);
+            this.ctrlPersonCardWithFilter1.Name = "ctrlPersonCardWithFilter1";
+            this.ctrlPersonCardWithFilter1.Size = new System.Drawing.Size(828, 410);
+            this.ctrlPersonCardWithFilter1.TabIndex = 3;
+            // 
             // TestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1325, 604);
+            this.Controls.Add(this.ctrlPersonCardWithFilter1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtTestEdit);
             this.Controls.Add(this.btnEdit);
@@ -80,5 +89,6 @@
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.TextBox txtTestEdit;
         private System.Windows.Forms.Button button1;
+        private People_Forms.Controls.ctrlPersonCardWithFilter ctrlPersonCardWithFilter1;
     }
 }

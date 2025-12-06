@@ -52,15 +52,5 @@ namespace Business_Layer
             return CountriesDataAccess.GetAllCountries();
         }
 
-        public static bool IsCountryExist(int ID)
-        {
-            return CountriesDataAccess.IsCountryExist(ID);
-        }
-
-        public static bool IsCountryExistByName(string CountryName)
-        {
-            return CountriesDataAccess.IsCountryExistByName(CountryName);
-        }
-
     }
 }

@@ -82,7 +82,7 @@ namespace Business_Layer
             int NationalityCountryID = -1;
             string ImagePath = string.Empty;
 
-            if (clsPeopleDataAccess.FindPersonWithPersonID(PersonID, ref NationalNo, ref FirstName,
+            if (clsPeopleDataAccess.FindPerson(PersonID, ref NationalNo, ref FirstName,
             ref SecondName, ref ThirdName, ref LastName, ref DateOfBirth,
             ref Gender, ref Address, ref Phone, ref Email
             , ref NationalityCountryID, ref ImagePath))
@@ -96,6 +96,37 @@ namespace Business_Layer
                 return null;
 
         }
+
+        public static clsPerson FindPerson(string NationalNo)
+        {
+            int PersonID = -1;
+            string FirstName = string.Empty;
+            string SecondName = string.Empty;
+            string ThirdName = string.Empty;
+            string LastName = string.Empty;
+            DateTime DateOfBirth = DateTime.Now;
+            byte Gender = 0;
+            string Address = string.Empty;
+            string Phone = string.Empty;
+            string Email = string.Empty;
+            int NationalityCountryID = -1;
+            string ImagePath = string.Empty;
+
+            if (clsPeopleDataAccess.FindPerson(NationalNo, ref PersonID, ref FirstName,
+            ref SecondName, ref ThirdName, ref LastName, ref DateOfBirth,
+            ref Gender, ref Address, ref Phone, ref Email
+            , ref NationalityCountryID, ref ImagePath))
+
+                return new clsPerson(PersonID, NationalNo, FirstName,
+             SecondName, ThirdName, LastName, DateOfBirth,
+             Gender, Address, Phone, Email,
+             NationalityCountryID, ImagePath);
+
+            else
+                return null;
+
+        }
+
 
         public static bool DeletePerson(int PersonID)
         {

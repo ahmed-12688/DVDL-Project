@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Global Classes\clsUtil.cs" />
     <Compile Include="People Forms\Controls\ctrlPersonCardWithFilter.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -74,11 +75,11 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="People Forms\frmManagePeopleList.cs">
+    <Compile Include="People Forms\frmListPeopleList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="People Forms\frmManagePeopleList.Designer.cs">
-      <DependentUpon>frmManagePeopleList.cs</DependentUpon>
+    <Compile Include="People Forms\frmListPeopleList.Designer.cs">
+      <DependentUpon>frmListPeopleList.cs</DependentUpon>
     </Compile>
     <Compile Include="People Forms\Controls\ctrlPersonCard.cs">
       <SubType>UserControl</SubType>
@@ -112,8 +113,8 @@
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="People Forms\frmManagePeopleList.resx">
-      <DependentUpon>frmManagePeopleList.cs</DependentUpon>
+    <EmbeddedResource Include="People Forms\frmListPeopleList.resx">
+      <DependentUpon>frmListPeopleList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="People Forms\Controls\ctrlPersonCard.resx">
       <DependentUpon>ctrlPersonCard.cs</DependentUpon>

@@ -10,7 +10,7 @@ namespace DataAccess_Layer
 {
     public class clsPeopleDataAccess
     {
-        static public bool FindPersonWithPersonID(int PersonID, ref string NationalNo, ref string FirstName,
+        static public bool FindPerson(int PersonID, ref string NationalNo, ref string FirstName,
             ref string SecondName, ref string ThirdName, ref string LastName, ref DateTime DateOfBirth,
             ref byte Gender, ref string Address, ref string Phone, ref string Email
             , ref int NationalityCountryID, ref string ImagePath)
@@ -60,6 +60,60 @@ namespace DataAccess_Layer
             }
             return IsFound;
         }
+
+
+        static public bool FindPerson(string NationalNo,ref int PersonID, ref string FirstName,
+    ref string SecondName, ref string ThirdName, ref string LastName, ref DateTime DateOfBirth,
+    ref byte Gender, ref string Address, ref string Phone, ref string Email
+    , ref int NationalityCountryID, ref string ImagePath)
+        {
+            bool IsFound = false;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                {
+                    string query = "SELECT * FROM People WHERE NationalNo = @NationalNo";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        connection.Open();
+                        command.Parameters.AddWithValue("@NationalNo", NationalNo);
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                IsFound = true;
+                                PersonID = (int)reader["PersonID"];
+                                FirstName = reader["FirstName"].ToString();
+                                SecondName = reader["SecondName"].ToString();
+                                ThirdName = reader["ThirdName"].ToString();
+                                LastName = reader["LastName"].ToString();
+                                DateOfBirth = (DateTime)reader["DateOfBirth"];
+                                Gender = (byte)reader["Gender"];
+                                Address = reader["Address"].ToString();
+                                Phone = reader["Phone"].ToString();
+                                Email = reader["email"].ToString();
+                                NationalityCountryID = (int)reader["NationalityCountryID"];
+                                if (reader["ImagePath"] != DBNull.Value)
+                                    ImagePath = reader["ImagePath"].ToString();
+                                else
+                                    ImagePath = string.Empty;
+                            }
+                            else
+                                IsFound = false;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                IsFound = false;
+            }
+            return IsFound;
+        }
+
+
 
         static public int AddNewPerson(string NationalNo, string FirstName,
             string SecondName, string ThirdName, string LastName, DateTime DateOfBirth,

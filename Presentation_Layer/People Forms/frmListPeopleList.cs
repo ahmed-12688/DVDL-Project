@@ -11,22 +11,22 @@ using Business_Layer;
 
 namespace Presentation_Layer
 {
-    public partial class frmManagePeopleList : Form
+    public partial class frmListPeopleList : Form
     {
-        public frmManagePeopleList()
-        {
-            InitializeComponent();
-        }
-
-
-        private static DataTable _dtAllPeople = clsPerson.GetAllPeople();
+        private DataTable _dtAllPeople = clsPerson.GetAllPeople();
 
         //only select the columns that you want to show in the grid
-        private DataTable _dtPeople = _dtAllPeople.DefaultView.ToTable(false, "PersonID", "NationalNo",
+        private DataTable _dtPeople;
+
+        public frmListPeopleList()
+        {
+            InitializeComponent();
+
+            _dtPeople = _dtAllPeople.DefaultView.ToTable(false, "PersonID", "NationalNo",
                                                          "FirstName", "SecondName", "ThirdName", "LastName",
                                                          "GenderCaption", "DateOfBirth", "CountryName",
                                                          "Phone", "Email");
-
+        }
 
         private void _RefreshPeopleList()
         {
@@ -163,7 +163,7 @@ namespace Presentation_Layer
             switch (cbFilterPeople.Text)
             {
                 case "Person ID":
-                    FilterColumn = "_PersonID";
+                    FilterColumn = "PersonID";
                     break;
 
                 case "National No":
@@ -218,7 +218,7 @@ namespace Presentation_Layer
             }
 
 
-            if (FilterColumn == "_PersonID")
+            if (FilterColumn == "PersonID")
                 _dtPeople.DefaultView.RowFilter = string.Format($"[{FilterColumn}] = {txtFilterPeople.Text.Trim()}");
             else
                 _dtPeople.DefaultView.RowFilter = string.Format($"[{FilterColumn}] LIKE '{txtFilterPeople.Text.Trim()}%'");

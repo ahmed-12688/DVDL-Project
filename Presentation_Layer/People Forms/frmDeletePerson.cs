@@ -35,7 +35,7 @@ namespace Presentation_Layer
 
         private void frmDeletePerson_Load(object sender, EventArgs e)
         {
-            ctrlPersonCard1.ReceivePersonIDFromForm(_PersonID);
+            ctrlPersonCard1.LoadPersonInfo(_PersonID);
         }
 
     }

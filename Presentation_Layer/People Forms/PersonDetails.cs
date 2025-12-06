@@ -16,7 +16,13 @@ namespace Presentation_Layer
         public frmPersonDetails(int PersonID)
         {
             InitializeComponent();
-            ctrlPersonCard1.ReceivePersonIDFromForm(PersonID);
+            ctrlPersonCard1.LoadPersonInfo(PersonID);
+        }
+
+        public frmPersonDetails(string NationalNo)
+        {
+            InitializeComponent();
+            ctrlPersonCard1.LoadPersonInfo(NationalNo);
         }
 
 
