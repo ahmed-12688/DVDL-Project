@@ -82,7 +82,7 @@ namespace Business_Layer
             int NationalityCountryID = -1;
             string ImagePath = string.Empty;
 
-            if (clsPeopleDataAccess.FindPerson(PersonID, ref NationalNo, ref FirstName,
+            if (clsPersonDataAccess.FindPerson(PersonID, ref NationalNo, ref FirstName,
             ref SecondName, ref ThirdName, ref LastName, ref DateOfBirth,
             ref Gender, ref Address, ref Phone, ref Email
             , ref NationalityCountryID, ref ImagePath))
@@ -112,7 +112,7 @@ namespace Business_Layer
             int NationalityCountryID = -1;
             string ImagePath = string.Empty;
 
-            if (clsPeopleDataAccess.FindPerson(NationalNo, ref PersonID, ref FirstName,
+            if (clsPersonDataAccess.FindPerson(NationalNo, ref PersonID, ref FirstName,
             ref SecondName, ref ThirdName, ref LastName, ref DateOfBirth,
             ref Gender, ref Address, ref Phone, ref Email
             , ref NationalityCountryID, ref ImagePath))
@@ -130,28 +130,28 @@ namespace Business_Layer
 
         public static bool DeletePerson(int PersonID)
         {
-            return clsPeopleDataAccess.DeletePerson(PersonID);
+            return clsPersonDataAccess.DeletePerson(PersonID);
         }
 
         public static DataTable GetAllPeople()
         {
-            return clsPeopleDataAccess.GetAllPersons();
+            return clsPersonDataAccess.GetAllPersons();
         }
 
         public static bool IsPersonExist(int PersonID)
         {
-            return clsPeopleDataAccess.IsPersonExist(PersonID);
+            return clsPersonDataAccess.IsPersonExist(PersonID);
         }
 
         public static bool IsPersonExist(string NationalNo)
         {
-            return clsPeopleDataAccess.IsPersonExist(NationalNo);
+            return clsPersonDataAccess.IsPersonExist(NationalNo);
         }
 
 
         private bool _AddNewPerson()
         {
-            this.PersonID = clsPeopleDataAccess.AddNewPerson(this.NationalNo, this.FirstName, this.SecondName,
+            this.PersonID = clsPersonDataAccess.AddNewPerson(this.NationalNo, this.FirstName, this.SecondName,
                 this.ThirdName, this.LastName, this.DateOfBirth, this.Gender, this.Address, this.Phone, this.Email
                 , this.NationalityCountryID, this.ImagePath);
             return (this.PersonID != -1);
@@ -159,7 +159,7 @@ namespace Business_Layer
 
         private bool _UpdatePerson()
         {
-            return (clsPeopleDataAccess.UpdatePerson(this.PersonID, this.NationalNo, this.FirstName, this.SecondName,
+            return (clsPersonDataAccess.UpdatePerson(this.PersonID, this.NationalNo, this.FirstName, this.SecondName,
                 this.ThirdName, this.LastName, this.DateOfBirth, this.Gender, this.Address, this.Phone, this.Email
                 , this.NationalityCountryID, this.ImagePath));
         }

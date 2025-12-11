@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess_Layer
 {
-    public static class CountriesDataAccess
+    public static class clsCountriesDataAccess
     {
 
         public static bool GetCountryInfoByID(int ID, ref string CountryName)

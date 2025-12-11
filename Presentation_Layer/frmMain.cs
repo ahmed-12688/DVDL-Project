@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Presentation_Layer.User_Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,5 +24,10 @@ namespace Presentation_Layer
             frm.Show();
         }
 
+        private void usersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListUsers frm = new frmListUsers();
+            frm.Show();
+        }
     }
 }

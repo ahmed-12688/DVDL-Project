@@ -28,7 +28,7 @@ namespace Business_Layer
         public static clsCountry Find(int ID)
         {
             string CountryName = string.Empty;
-            if (CountriesDataAccess.GetCountryInfoByID(ID, ref CountryName))
+            if (clsCountriesDataAccess.GetCountryInfoByID(ID, ref CountryName))
             {
                 return new clsCountry(ID, CountryName);
             }
@@ -39,7 +39,7 @@ namespace Business_Layer
         public static clsCountry Find(string CountryName)
         {
             int CountryID = 0;
-            if (CountriesDataAccess.GetCountryInfoByName(CountryName, ref CountryID))
+            if (clsCountriesDataAccess.GetCountryInfoByName(CountryName, ref CountryID))
             {
                 return new clsCountry(CountryID, CountryName);
             }
@@ -49,7 +49,7 @@ namespace Business_Layer
 
         public static DataTable GetAllCountries()
         {
-            return CountriesDataAccess.GetAllCountries();
+            return clsCountriesDataAccess.GetAllCountries();
         }
 
     }

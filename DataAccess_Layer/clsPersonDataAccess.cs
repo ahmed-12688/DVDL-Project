@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess_Layer
 {
-    public class clsPeopleDataAccess
+    public class clsPersonDataAccess
     {
         static public bool FindPerson(int PersonID, ref string NationalNo, ref string FirstName,
             ref string SecondName, ref string ThirdName, ref string LastName, ref DateTime DateOfBirth,

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.gbFilter = new System.Windows.Forms.GroupBox();
             this.btnFindPerson = new System.Windows.Forms.Button();
             this.btnAddNewPerson = new System.Windows.Forms.Button();
@@ -35,7 +36,9 @@
             this.cbFilterPeople = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.ctrlPersonCard1 = new Presentation_Layer.ctrlPersonCard();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.gbFilter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // gbFilter
@@ -79,6 +82,7 @@
             this.txtFilterPeople.Size = new System.Drawing.Size(184, 22);
             this.txtFilterPeople.TabIndex = 11;
             this.txtFilterPeople.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFilterPeople_KeyPress);
+            this.txtFilterPeople.Validating += new System.ComponentModel.CancelEventHandler(this.txtFilterPeople_Validating);
             // 
             // cbFilterPeople
             // 
@@ -91,6 +95,7 @@
             this.cbFilterPeople.Name = "cbFilterPeople";
             this.cbFilterPeople.Size = new System.Drawing.Size(168, 24);
             this.cbFilterPeople.TabIndex = 10;
+            this.cbFilterPeople.SelectedIndexChanged += new System.EventHandler(this.cbFilterPeople_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -109,6 +114,10 @@
             this.ctrlPersonCard1.Size = new System.Drawing.Size(821, 314);
             this.ctrlPersonCard1.TabIndex = 0;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // ctrlPersonCardWithFilter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -120,6 +129,7 @@
             this.Load += new System.EventHandler(this.ctrlPersonCardWithFilter_Load);
             this.gbFilter.ResumeLayout(false);
             this.gbFilter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -133,5 +143,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnFindPerson;
         private System.Windows.Forms.Button btnAddNewPerson;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
