@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.tcUserInfo = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tpUserInfo = new System.Windows.Forms.TabPage();
             this.ctrlPersonCardWithFilter1 = new Presentation_Layer.People_Forms.Controls.ctrlPersonCardWithFilter();
             this.btnPersonInfoNext = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tpLoginInfo = new System.Windows.Forms.TabPage();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.lblUserID = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -52,8 +52,8 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.tcUserInfo.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tpUserInfo.SuspendLayout();
+            this.tpLoginInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
@@ -63,25 +63,25 @@
             // 
             // tcUserInfo
             // 
-            this.tcUserInfo.Controls.Add(this.tabPage1);
-            this.tcUserInfo.Controls.Add(this.tabPage2);
+            this.tcUserInfo.Controls.Add(this.tpUserInfo);
+            this.tcUserInfo.Controls.Add(this.tpLoginInfo);
             this.tcUserInfo.Location = new System.Drawing.Point(12, 88);
             this.tcUserInfo.Name = "tcUserInfo";
             this.tcUserInfo.SelectedIndex = 0;
             this.tcUserInfo.Size = new System.Drawing.Size(862, 503);
             this.tcUserInfo.TabIndex = 0;
             // 
-            // tabPage1
+            // tpUserInfo
             // 
-            this.tabPage1.Controls.Add(this.ctrlPersonCardWithFilter1);
-            this.tabPage1.Controls.Add(this.btnPersonInfoNext);
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(854, 474);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Person Info";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tpUserInfo.Controls.Add(this.ctrlPersonCardWithFilter1);
+            this.tpUserInfo.Controls.Add(this.btnPersonInfoNext);
+            this.tpUserInfo.Location = new System.Drawing.Point(4, 25);
+            this.tpUserInfo.Name = "tpUserInfo";
+            this.tpUserInfo.Padding = new System.Windows.Forms.Padding(3);
+            this.tpUserInfo.Size = new System.Drawing.Size(854, 474);
+            this.tpUserInfo.TabIndex = 0;
+            this.tpUserInfo.Text = "Person Info";
+            this.tpUserInfo.UseVisualStyleBackColor = true;
             // 
             // ctrlPersonCardWithFilter1
             // 
@@ -107,28 +107,28 @@
             this.btnPersonInfoNext.UseVisualStyleBackColor = true;
             this.btnPersonInfoNext.Click += new System.EventHandler(this.btnPersonInfoNext_Click);
             // 
-            // tabPage2
+            // tpLoginInfo
             // 
-            this.tabPage2.Controls.Add(this.pictureBox2);
-            this.tabPage2.Controls.Add(this.lblUserID);
-            this.tabPage2.Controls.Add(this.label4);
-            this.tabPage2.Controls.Add(this.chkIsActive);
-            this.tabPage2.Controls.Add(this.txtUserName);
-            this.tabPage2.Controls.Add(this.txtConfirmPassword);
-            this.tabPage2.Controls.Add(this.label2);
-            this.tabPage2.Controls.Add(this.label3);
-            this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.txtPassword);
-            this.tabPage2.Controls.Add(this.pictureBox1);
-            this.tabPage2.Controls.Add(this.pictureBox8);
-            this.tabPage2.Controls.Add(this.pictureBox3);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(854, 474);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Login Info";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tpLoginInfo.Controls.Add(this.pictureBox2);
+            this.tpLoginInfo.Controls.Add(this.lblUserID);
+            this.tpLoginInfo.Controls.Add(this.label4);
+            this.tpLoginInfo.Controls.Add(this.chkIsActive);
+            this.tpLoginInfo.Controls.Add(this.txtUserName);
+            this.tpLoginInfo.Controls.Add(this.txtConfirmPassword);
+            this.tpLoginInfo.Controls.Add(this.label2);
+            this.tpLoginInfo.Controls.Add(this.label3);
+            this.tpLoginInfo.Controls.Add(this.label5);
+            this.tpLoginInfo.Controls.Add(this.txtPassword);
+            this.tpLoginInfo.Controls.Add(this.pictureBox1);
+            this.tpLoginInfo.Controls.Add(this.pictureBox8);
+            this.tpLoginInfo.Controls.Add(this.pictureBox3);
+            this.tpLoginInfo.Location = new System.Drawing.Point(4, 25);
+            this.tpLoginInfo.Name = "tpLoginInfo";
+            this.tpLoginInfo.Padding = new System.Windows.Forms.Padding(3);
+            this.tpLoginInfo.Size = new System.Drawing.Size(854, 474);
+            this.tpLoginInfo.TabIndex = 1;
+            this.tpLoginInfo.Text = "Login Info";
+            this.tpLoginInfo.UseVisualStyleBackColor = true;
             // 
             // pictureBox2
             // 
@@ -328,11 +328,12 @@
             this.Controls.Add(this.tcUserInfo);
             this.Name = "frmAddEditUser";
             this.Text = "Add & Edit User";
+            this.Activated += new System.EventHandler(this.frmAddEditUser_Activated);
             this.Load += new System.EventHandler(this.frmAddEditUser_Load);
             this.tcUserInfo.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.tpUserInfo.ResumeLayout(false);
+            this.tpLoginInfo.ResumeLayout(false);
+            this.tpLoginInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
@@ -346,8 +347,8 @@
         #endregion
 
         private System.Windows.Forms.TabControl tcUserInfo;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tpUserInfo;
+        private System.Windows.Forms.TabPage tpLoginInfo;
         private System.Windows.Forms.Label lblAddEditUser;
         private People_Forms.Controls.ctrlPersonCardWithFilter ctrlPersonCardWithFilter1;
         private System.Windows.Forms.Button btnPersonInfoNext;

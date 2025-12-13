@@ -48,6 +48,45 @@ namespace DataAccess_Layer
             return IsFound;
         }
 
+        static public bool FindUser(string UserName, ref int UserID, ref int PersonID,
+        ref string Password, ref bool IsActive)
+        {
+            bool IsFound = false;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                {
+                    string query = "SELECT * FROM Users WHERE UserName = @UserName";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        connection.Open();
+                        command.Parameters.AddWithValue("@UserName", UserName);
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                IsFound = true;
+                                PersonID = (int)reader["PersonID"];
+                                UserID = (int)reader["UserID"];
+                                Password = reader["Password"].ToString();
+                                IsActive = (bool)(reader["IsActive"]);
+                            }
+                            else
+                                IsFound = false;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                IsFound = false;
+            }
+            return IsFound;
+        }
+
+
         static public int AddNewUser(int PersonID ,string UserName,
         string Password, bool IsActive)
         {
@@ -117,6 +156,41 @@ namespace DataAccess_Layer
             }
 
             return (RowsAffected > 0);
+        }
+
+        public static bool ChangePassword(int UserID, string NewPassword)
+        {
+
+            int rowsAffected = 0;
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"Update  Users  
+                            set Password = @Password
+                            where UserID = @UserID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@Password", NewPassword);
+            command.Parameters.AddWithValue("@UserID", UserID);
+
+            try
+            {
+                connection.Open();
+                rowsAffected = command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                //Console.WriteLine("Error: " + ex.Message);
+                return false;
+            }
+
+            finally
+            {
+                connection.Close();
+            }
+
+            return (rowsAffected > 0);
         }
 
         public static bool DeleteUser(int UserID)

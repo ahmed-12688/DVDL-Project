@@ -14,8 +14,7 @@ namespace Presentation_Layer.User
 {
     public partial class frmChangePassword : Form
     {
-        private int _UserID;
-        private clsUser _User;
+        private int _UserID = -1;
         public frmChangePassword(int UserID)
         {
             InitializeComponent();
@@ -24,8 +23,13 @@ namespace Presentation_Layer.User
 
         private void frmChangePassword_Load(object sender, EventArgs e)
         {
+            if(this._UserID != -1)
             ctrlUserCard1.LoadUserInfo(_UserID);
-            _User = ctrlUserCard1.SelectdedUserInfo;
+        }
+
+        private void frmChangePassword_Activated(object sender, EventArgs e)
+        {
+            txtCurrentPassword.Focus();
         }
 
         private void txtCurrentPassword_Validating(object sender, CancelEventArgs e)
@@ -34,20 +38,22 @@ namespace Presentation_Layer.User
             { 
                 e.Cancel = true;
                 errorProvider1.SetError(txtCurrentPassword, "Password Is required");
+                return;
             }
             else
             {
                 errorProvider1.SetError(txtCurrentPassword, null);
             }
 
-            if(txtCurrentPassword.Text != ctrlUserCard1.SelectdedUserInfo.Password)
+            if (txtCurrentPassword.Text != ctrlUserCard1.SelectdedUserInfo.Password)
             {
                 e.Cancel = true;
                 errorProvider1.SetError(txtCurrentPassword, "Wrong Password");
+                return;
             }
             else
             {
-                errorProvider1.SetError(txtCurrentPassword,null);
+                errorProvider1.SetError(txtCurrentPassword, null);
             }
 
         }
@@ -71,17 +77,12 @@ namespace Presentation_Layer.User
             if (txtConfirmPassword.Text.Trim() != txtNewPassword.Text.Trim())
             {
                 e.Cancel = true;
-                errorProvider1.SetError(txtConfirmPassword, "confirmed Password Don't match Password ");
+                errorProvider1.SetError(txtConfirmPassword, "confirmed Password Doesn't match New Password ");
             }
             else
             {
                 errorProvider1.SetError(txtConfirmPassword, null);
             }
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -92,16 +93,17 @@ namespace Presentation_Layer.User
                return;
             }
 
-            _User.PersonID = ctrlUserCard1.SelectdedUserInfo.PersonID;
-            _User.UserName = ctrlUserCard1.SelectdedUserInfo.UserName;
-            _User.Password = txtNewPassword.Text.Trim();
-            _User.IsActive = ctrlUserCard1.SelectdedUserInfo.IsActive;
-
-            if (_User.Save())
+            if (clsUser.ChangePassword(_UserID, txtNewPassword.Text.Trim()))
                 MessageBox.Show("Password Changed Successfully.", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
                 MessageBox.Show("Faild To Change Password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
     }
 }

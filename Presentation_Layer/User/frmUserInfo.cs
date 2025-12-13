@@ -12,14 +12,12 @@ namespace Presentation_Layer.User
 {
     public partial class frmUserInfo : Form
     {
-        private int _PersonID = -1;
+        private int _UserID = -1;
         public frmUserInfo(int UserID)
         {
             InitializeComponent();
-            this._PersonID = UserID;
+            this._UserID = UserID;
         }
-
-
 
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -28,7 +26,7 @@ namespace Presentation_Layer.User
 
         private void frmUserInfo_Load(object sender, EventArgs e)
         {
-            ctrlUserCard1.LoadUserInfo(_PersonID);
+            ctrlUserCard1.LoadUserInfo(_UserID);
         }
     }
 }

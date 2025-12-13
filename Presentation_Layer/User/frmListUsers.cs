@@ -1,4 +1,5 @@
 ﻿using Business_Layer;
+using Presentation_Layer.Global_Classes;
 using Presentation_Layer.People_Forms;
 using Presentation_Layer.User;
 using System;
@@ -63,6 +64,7 @@ namespace Presentation_Layer.User_Forms
         {
             frmAddEditUser frm = new frmAddEditUser();
             frm.ShowDialog();
+            _RefreshUsersList();
         }
 
         private void cbFilterUsers_SelectedIndexChanged(object sender, EventArgs e)
@@ -77,7 +79,7 @@ namespace Presentation_Layer.User_Forms
             if (cbFilterUsers.Visible)
             {
                 cbFilterUsers.Text = string.Empty;
-                cbFilterUsers.Focus();
+                txtFilterUsers.Focus();
             }
 
         }
@@ -149,7 +151,7 @@ namespace Presentation_Layer.User_Forms
         {
             if (cbIsActive.SelectedItem == "All")
                 _dtUsers.DefaultView.RowFilter = string.Empty;
-            else if(cbIsActive.SelectedItem == "Yes")
+            else if (cbIsActive.SelectedItem == "Yes")
                 _dtUsers.DefaultView.RowFilter = string.Format("[IsActive] = true");
             else
                 _dtUsers.DefaultView.RowFilter = string.Format("[IsActive] = false");
@@ -179,19 +181,20 @@ namespace Presentation_Layer.User_Forms
             frm.ShowDialog();
         }
 
-        private void addNewPersonToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmAddEditUser frm = new frmAddEditUser();
-            frm.ShowDialog();
-            _RefreshUsersList();
-        }
-
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show($"Are You sure You want to delete User with ID [{(int)dgvUsers.CurrentRow.Cells[0].Value}] !") == DialogResult.OK)
+            int UserIDToDelete = (int)dgvUsers.CurrentRow.Cells[0].Value;
+
+            if(UserIDToDelete == clsCurrentUser.User.UserID )
             {
-                clsUser.DeleteUser((int)dgvUsers.CurrentRow.Cells[0].Value);
-                _RefreshUsersList();
+                MessageBox.Show("You can't delete the current user","Error",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (MessageBox.Show($"Are You sure You want to delete User with ID [{UserIDToDelete}] !") == DialogResult.OK)
+            {
+                if (clsUser.DeleteUser((int)dgvUsers.CurrentRow.Cells[0].Value))
+                    _RefreshUsersList();
             }
             else
                 return;

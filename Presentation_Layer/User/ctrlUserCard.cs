@@ -21,16 +21,37 @@ namespace Presentation_Layer.User
         }
 
         public clsUser SelectdedUserInfo
-        { get { return _User; } }
+            { get { return _User; } }
+
         public void LoadUserInfo(int UserID)
         {
             _User = clsUser.FindUser(UserID);
-            if (_User != null)
-                ctrlPersonCard1.LoadPersonInfo(_User.PersonID);
+            if (_User == null)
+            {
+                _ResetUserInfo();
+                MessageBox.Show("No User with UserID = " + UserID.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
+            _FillUserInfo();
+        }
+
+        private void _FillUserInfo()
+        {
+
+            ctrlPersonCard1.LoadPersonInfo(_User.PersonID);
             lblUserID.Text = _User.UserID.ToString();
             lblUserName.Text = _User.UserName.ToString();
-            lblIsActive.Text = (_User.IsActive) ? "Yes" : "No";
+            lblIsActive.Text = _User.IsActive ? "Yes" : "No";
+        }
+
+        private void _ResetUserInfo()
+        {
+
+            ctrlPersonCard1.ResetPersonInfo();
+            lblUserID.Text = "[???]";
+            lblUserName.Text = "[???]";
+            lblIsActive.Text = "[???]";
         }
     }
 }

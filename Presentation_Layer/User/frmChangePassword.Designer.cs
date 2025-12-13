@@ -202,6 +202,7 @@
             this.Controls.Add(this.ctrlUserCard1);
             this.Name = "frmChangePassword";
             this.Text = "Change Password";
+            this.Activated += new System.EventHandler(this.frmChangePassword_Activated);
             this.Load += new System.EventHandler(this.frmChangePassword_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();

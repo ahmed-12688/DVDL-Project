@@ -15,6 +15,7 @@ namespace Business_Layer
 
         public int UserID { get; set; }
         public int PersonID { get; set; }
+        public clsPerson PersonInfo;
         public string UserName { get; set; }
         public string Password { get; set; }
         public bool IsActive { get; set; }
@@ -31,10 +32,11 @@ namespace Business_Layer
             this.Mode = enMode.Addnew;
         }
 
-        public clsUser(int userId, int personID, string userName, string password, bool isActive   )
+        public clsUser(int userId, int personID, string userName, string password, bool isActive)
         {
             this.UserID = userId;
             this.PersonID = personID;
+            this.PersonInfo = clsPerson.FindPerson(PersonID);
             this.UserName = userName;
             this.Password = password;
             this.IsActive = isActive;
@@ -53,7 +55,26 @@ namespace Business_Layer
             {
                 return new clsUser(UserID, PersonID, UserName,
                        Password, IsActive);
-            }   
+            }
+
+            else
+                return null;
+
+        }
+
+        public static clsUser FindUser(string UserName)
+        {
+            int PersonID = -1;
+            int UserID = -1;
+            string Password = string.Empty;
+            bool IsActive = true;
+
+            if (clsUserDataAccess.FindUser(UserName, ref PersonID, ref UserID,
+            ref Password, ref IsActive))
+            {
+                return new clsUser(PersonID, UserID, UserName,
+                       Password, IsActive);
+            }
 
             else
                 return null;
@@ -85,6 +106,10 @@ namespace Business_Layer
             return clsUserDataAccess.IsUserExistByUserName(UserName);
         }
 
+        public static bool ChangePassword(int UserID, string NewPassword)
+        {
+            return clsUserDataAccess.ChangePassword(UserID, NewPassword);
+        }
 
         private bool _AddNewUser()
         {
