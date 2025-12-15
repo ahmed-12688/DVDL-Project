@@ -40,7 +40,7 @@ namespace Presentation_Layer.Application_Types
 
         private void _RefereshApplicationTypesList()
         {
-            _ApplicationTypes = clsApplicationType.GetAllApplicationTypeDataTable();
+            _ApplicationTypes = clsApplicationType.GetAllApplicationTypes();
             dgvApplicationTypes.DataSource = _ApplicationTypes;
 
             lblRecordsNumber.Text = dgvApplicationTypes.RowCount.ToString();

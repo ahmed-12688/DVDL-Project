@@ -43,9 +43,9 @@ namespace Business_Layer
         }
 
         
-        public static DataTable GetAllApplicationTypeDataTable()
+        public static DataTable GetAllApplicationTypes()
         {
-            return clsApplicationTypeDataAccess.GetAllApplicationType();
+            return clsApplicationTypeDataAccess.GetAllApplicationTypes();
         }
     }
 }

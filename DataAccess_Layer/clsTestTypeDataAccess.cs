@@ -1,5 +1,4 @@
-﻿using Microsoft.SqlServer.Server;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -9,28 +8,29 @@ using System.Threading.Tasks;
 
 namespace DataAccess_Layer
 {
-    public static class clsApplicationTypeDataAccess
+    public class clsTestTypeDataAccess
     {
-        static public bool FindApplicationType(int AppTypeID, ref string Title, ref decimal Fees)
+        static public bool FindTestType(int TestTypeID, ref string Title, ref string Description, ref decimal Fees)
         {
             bool IsFound = false;
             try
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
-                    string query = "SELECT * FROM ApplicationTypes WHERE ApplicationTypeID = @AppTypeID";
+                    string query = "SELECT * FROM TestTypes WHERE TestTypeID = @TestTypeID";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         connection.Open();
-                        command.Parameters.AddWithValue("@AppTypeID", AppTypeID);
+                        command.Parameters.AddWithValue("@TestTypeID", TestTypeID);
 
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.Read())
                             {
                                 IsFound = true;
-                                Title = reader["ApplicationTypeTitle"].ToString();
-                                Fees = Convert.ToDecimal(reader["ApplicationFees"]);
+                                Title = reader["TestTypeTitle"].ToString();
+                                Description = reader["TestTypeDescription"].ToString();
+                                Fees = Convert.ToDecimal(reader["TestTypeFees"]);
                             }
                             else
                                 IsFound = false;
@@ -46,20 +46,21 @@ namespace DataAccess_Layer
             return IsFound;
         }
 
-        public static bool UpdateApplicationType(int AppID, String Title, decimal Fees)
+        public static bool UpdateTestType(int AppID, String Title,string Description, decimal Fees)
         {
             int RowsAffected = 0;
             try
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
-                    string query = @"UPDATE ApplicationTypes SET ApplicationTypeTitle = @Title, ApplicationFees = @Fees
-                     WHERE ApplicationTypeID = @AppID";
+                    string query = @"UPDATE TestTypes SET TestTypeTitle = @Title
+                    ,TestTypeDescription = @Description, TestTypeFees = @Fees WHERE TestTypeID = @AppID";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@Title", Title);
                         command.Parameters.AddWithValue("@Fees", Fees);
+                        command.Parameters.AddWithValue("@Description", Description);
                         command.Parameters.AddWithValue("@AppID", AppID);
 
 
@@ -78,7 +79,7 @@ namespace DataAccess_Layer
 
         }
 
-        public static DataTable GetAllApplicationTypes()
+        public static DataTable GetAllTestTypes()
         {
             DataTable dt = new DataTable();
             try
@@ -87,7 +88,7 @@ namespace DataAccess_Layer
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
 
-                    string query = @"SELECT * FROM ApplicationTypes";
+                    string query = @"SELECT * FROM TestTypes";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         connection.Open();
@@ -108,5 +109,6 @@ namespace DataAccess_Layer
             return dt;
 
         }
+
     }
 }

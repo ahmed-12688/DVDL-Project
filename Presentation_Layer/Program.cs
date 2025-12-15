@@ -10,6 +10,7 @@ using Presentation_Layer.User;
 using Business_Layer;
 using Presentation_Layer.Login;
 using Presentation_Layer.Application_Types;
+using Presentation_Layer.Test_Types;
 
 namespace Presentation_Layer
 {
@@ -23,7 +24,7 @@ namespace Presentation_Layer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmApplicationTypes());
+            Application.Run(new frmTestTypes());
         }
     }
 }
