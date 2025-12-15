@@ -18,13 +18,11 @@ namespace Presentation_Layer.Application_Types
         public frmApplicationTypes()
         {
             InitializeComponent();
-            _ApplicationTypes = clsApplicationType.GetAllApplicationTypeDataTable();
         }
 
         private void frmApplicationTypes_Load(object sender, EventArgs e)
         {
             _RefereshApplicationTypesList();
-            lblRecordsNumber.Text = dgvApplicationTypes.Rows.Count.ToString();
             if (dgvApplicationTypes.Rows.Count > 0)
             {
 

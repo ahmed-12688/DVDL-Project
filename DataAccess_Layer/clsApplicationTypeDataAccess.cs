@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess_Layer
 {
-     public static class clsApplicationTypeDataAccess
+    public static class clsApplicationTypeDataAccess
     {
         static public bool FindApplicationType(int AppTypeID, ref string Title, ref decimal Fees)
         {
@@ -46,7 +46,6 @@ namespace DataAccess_Layer
             return IsFound;
         }
 
-
         public static bool UpdateApplicationType(int AppID, String Title, decimal Fees)
         {
             int RowsAffected = 0;
@@ -82,7 +81,7 @@ namespace DataAccess_Layer
         public static DataTable GetAllApplicationType()
         {
             DataTable dt = new DataTable();
-                        try
+            try
             {
 
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
