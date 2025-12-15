@@ -9,6 +9,7 @@ using Presentation_Layer.People_Forms;
 using Presentation_Layer.User;
 using Business_Layer;
 using Presentation_Layer.Login;
+using Presentation_Layer.Application_Types;
 
 namespace Presentation_Layer
 {
@@ -22,7 +23,7 @@ namespace Presentation_Layer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmLogin());
+            Application.Run(new frmApplicationTypes());
         }
     }
 }

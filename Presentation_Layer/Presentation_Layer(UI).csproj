@@ -50,6 +50,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application Types\frmApplicationTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Application Types\frmApplicationTypes.Designer.cs">
+      <DependentUpon>frmApplicationTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Application Types\frmEditApplicationTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Application Types\frmEditApplicationTypes.Designer.cs">
+      <DependentUpon>frmEditApplicationTypes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Global Classes\clsCurrentUser.cs" />
     <Compile Include="Global Classes\clsUtil.cs" />
     <Compile Include="Login\frmLogin.cs">
@@ -144,6 +156,12 @@
     <Compile Include="User\frmUserInfo.Designer.cs">
       <DependentUpon>frmUserInfo.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Application Types\frmApplicationTypes.resx">
+      <DependentUpon>frmApplicationTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Application Types\frmEditApplicationTypes.resx">
+      <DependentUpon>frmEditApplicationTypes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -343,6 +361,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Login\LoginInfo.txt" />
+    <None Include="Resources\edit 321.png" />
+    <None Include="Resources\money 32.png" />
+    <None Include="Resources\ApplicationType.png" />
+    <None Include="Resources\Application Types 512.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
