@@ -244,10 +244,11 @@
             this.txtFilterPeople.TextChanged += new System.EventHandler(this.txtFilterPeople_TextChanged);
             this.txtFilterPeople.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFilterPeople_KeyPress);
             // 
-            // frmManagePeopleList
+            // frmListPeopleList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1420, 707);
             this.Controls.Add(this.txtFilterPeople);
             this.Controls.Add(this.cbFilterPeople);
@@ -258,7 +259,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.dgvPeople);
-            this.Name = "frmManagePeopleList";
+            this.Name = "frmListPeopleList";
             this.Text = "People";
             this.Load += new System.EventHandler(this.frmManagePeopleList_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPeople)).EndInit();

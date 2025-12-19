@@ -23,7 +23,7 @@ namespace Presentation_Layer.Application_Types
 
         private void frmEditApplicationTypes_Load(object sender, EventArgs e)
         {
-            _ApplicationType = clsApplicationType.FindApplicationType(_AppTypeID);
+            _ApplicationType = clsApplicationType.FindApplicationType((clsApplicationType.enApplicationTypes)_AppTypeID);
             lblApplicationTypeID.Text = _AppTypeID.ToString();
 
             if (_ApplicationType != null)

@@ -1,0 +1,207 @@
+﻿using Business_Layer;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Presentation_Layer.Applications.Local_Driving_Licenses
+{
+    public partial class frmListLocalDrivingLicensesApplications : Form
+    {
+        private DataTable _LDLApps;
+
+        public frmListLocalDrivingLicensesApplications()
+        {
+            InitializeComponent();
+        }
+
+        private void _RefreshLDLAppsList()
+        {
+            _LDLApps = clsLocalDrivingLicenseApplication.GetAllLocalDrivingLicenseApplications();
+            dgvLDLApps.DataSource = _LDLApps;
+            lblRecordsNumber.Text = dgvLDLApps.RowCount.ToString();
+        }
+
+        private void frmListLocalDrivingLicensesApplications_Load(object sender, EventArgs e)
+        {
+            _RefreshLDLAppsList();
+            cbFilterLDLApp.SelectedIndex = 0;
+
+            if (dgvLDLApps.Rows.Count > 0)
+            {
+
+
+                dgvLDLApps.Columns[0].HeaderText = "L.D.L.AppID";
+                dgvLDLApps.Columns[0].Width = 90;
+
+                dgvLDLApps.Columns[1].HeaderText = "Driving Class";
+                dgvLDLApps.Columns[1].Width = 200;
+
+                dgvLDLApps.Columns[2].HeaderText = "National No";
+                dgvLDLApps.Columns[2].Width = 100;
+
+                dgvLDLApps.Columns[3].HeaderText = "Full Name";
+                dgvLDLApps.Columns[3].Width = 250;
+
+                dgvLDLApps.Columns[4].HeaderText = "Application Date";
+                dgvLDLApps.Columns[4].Width = 150;
+
+                dgvLDLApps.Columns[5].HeaderText = "Passed Tests";
+                dgvLDLApps.Columns[5].Width = 90;
+
+            }
+
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void cbFilterLDLApp_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtFilterLDLApp.Visible = (cbFilterLDLApp.Text != "None");
+
+            if (cbFilterLDLApp.Visible)
+            {
+                txtFilterLDLApp.Text = string.Empty;
+                txtFilterLDLApp.Focus();
+            }
+            _LDLApps.DefaultView.RowFilter = "";
+            lblRecordsNumber.Text = dgvLDLApps.Rows.Count.ToString();
+
+        }
+
+        private void txtFilterLDLApp_TextChanged(object sender, EventArgs e)
+        {
+            string FilterColumn = string.Empty;
+
+            switch (cbFilterLDLApp.Text)
+            {
+                case "L.D.L.AppID":
+                    FilterColumn = "LocalDrivingLicenseApplicationID";
+                    break;
+
+                case "National No":
+                    FilterColumn = "NationalNo";
+                    break;
+
+                case "Full Name":
+                    FilterColumn = "FullName";
+                    break;
+
+                case "Status":
+                    FilterColumn = "Status";
+                    break;
+
+                default:
+                    FilterColumn = "None";
+                    break;
+            }
+
+
+
+            //Reset the filters in case nothing selected or filter value conains nothing.
+            if (txtFilterLDLApp.Text.Trim() == "" || FilterColumn == "None")
+            {
+                _LDLApps.DefaultView.RowFilter = "";
+                lblRecordsNumber.Text = dgvLDLApps.Rows.Count.ToString();
+                return;
+            }
+
+
+            if (FilterColumn == "LocalDrivingLicenseApplicationID")
+                _LDLApps.DefaultView.RowFilter = string.Format($"[{FilterColumn}] = {txtFilterLDLApp.Text.Trim()}");
+            else
+                _LDLApps.DefaultView.RowFilter = string.Format($"[{FilterColumn}] LIKE '{txtFilterLDLApp.Text.Trim()}%'");
+
+            lblRecordsNumber.Text = dgvLDLApps.Rows.Count.ToString();
+
+
+        }
+
+        private void txtFilterLDLApp_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //we allow number incase person id is selected.
+            if (cbFilterLDLApp.Text == "L.D.L.AppID")
+                e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+
+        }
+
+        private void btnAddNewLDLApp_Click(object sender, EventArgs e)
+        {
+            frmAddEditLocalDrivinglicenseApplication frm = new frmAddEditLocalDrivinglicenseApplication();
+            frm.ShowDialog();
+            _RefreshLDLAppsList();
+        }
+
+        private void showApplicationDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmLocalDrivingLicenseApplicationInfo frm = new frmLocalDrivingLicenseApplicationInfo((int)dgvLDLApps.CurrentRow.Cells[0].Value);
+            frm.ShowDialog();
+            _RefreshLDLAppsList();
+        }
+
+        private void editApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddEditLocalDrivinglicenseApplication frm = new frmAddEditLocalDrivinglicenseApplication((int)dgvLDLApps.CurrentRow.Cells[0].Value);
+            frm.ShowDialog();
+            _RefreshLDLAppsList();
+        }
+
+        private void deleteApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure do want to delete this application?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+
+            int LocalDrivingLicenseApplicationID = (int)dgvLDLApps.CurrentRow.Cells[0].Value;
+
+            clsLocalDrivingLicenseApplication LocalDrivingLicenseApplication =
+                clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(LocalDrivingLicenseApplicationID);
+
+            if (LocalDrivingLicenseApplication != null)
+            {
+                if (LocalDrivingLicenseApplication.DeleteApplcation())
+                {
+                    MessageBox.Show("Application Deleted Successfully.", "Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //refresh the form again.
+                    _RefreshLDLAppsList();
+                }
+                else
+                {
+                    MessageBox.Show("Could not delete applicatoin, other data depends on it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void cancelApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure do want to cancel this application?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+
+            int LocalDrivingLicenseApplicationID = (int)dgvLDLApps.CurrentRow.Cells[0].Value;
+
+            clsLocalDrivingLicenseApplication LocalDrivingLicenseApplication =
+                clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(LocalDrivingLicenseApplicationID);
+
+            if (LocalDrivingLicenseApplication != null)
+            {
+                if (LocalDrivingLicenseApplication.CancelApplication())
+                {
+                    MessageBox.Show("Application Cancelled Successfully.", "Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //refresh the form again.
+                    _RefreshLDLAppsList();
+                }
+                else
+                {
+                    MessageBox.Show("Could not cancel applicatoin.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+    }
+}

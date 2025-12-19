@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
+using System.Drawing;   
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +14,6 @@ namespace Presentation_Layer.Test_Types
 {
     public partial class frmTestTypes : Form
     {
-        private int _TestTypeID = -1;
         private DataTable _TestTypes;
         public frmTestTypes()
         {
@@ -58,7 +57,7 @@ namespace Presentation_Layer.Test_Types
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmEditTestTypes frm = new frmEditTestTypes((int)dgvTestTypes.CurrentRow.Cells[0].Value);
+            frmEditTestTypes frm = new frmEditTestTypes((clsTestType.enTestType)dgvTestTypes.CurrentRow.Cells[0].Value);
             frm.ShowDialog();
             _RefereshTestTypesList();
         }

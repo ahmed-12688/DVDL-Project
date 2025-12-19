@@ -50,17 +50,47 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application Types\frmApplicationTypes.cs">
+    <Compile Include="Applications\Application Types\frmApplicationTypes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Application Types\frmApplicationTypes.Designer.cs">
+    <Compile Include="Applications\Application Types\frmApplicationTypes.Designer.cs">
       <DependentUpon>frmApplicationTypes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Application Types\frmEditApplicationTypes.cs">
+    <Compile Include="Applications\Application Types\frmEditApplicationTypes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Application Types\frmEditApplicationTypes.Designer.cs">
+    <Compile Include="Applications\Application Types\frmEditApplicationTypes.Designer.cs">
       <DependentUpon>frmEditApplicationTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\Controls\ctrlBasicApplicationInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Applications\Controls\ctrlBasicApplicationInfo.Designer.cs">
+      <DependentUpon>ctrlBasicApplicationInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\Local Driving Licenses\ctrlLDLAppInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Applications\Local Driving Licenses\ctrlLDLAppInfo.Designer.cs">
+      <DependentUpon>ctrlLDLAppInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\Local Driving Licenses\frmAddEditLocalDrivinglicenseApplication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\Local Driving Licenses\frmAddEditLocalDrivinglicenseApplication.Designer.cs">
+      <DependentUpon>frmAddEditLocalDrivinglicenseApplication.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\Local Driving Licenses\frmListLocalDrivingLicensesApplications.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\Local Driving Licenses\frmListLocalDrivingLicensesApplications.Designer.cs">
+      <DependentUpon>frmListLocalDrivingLicensesApplications.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\Local Driving Licenses\frmLocalDrivingLicenseApplicationInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\Local Driving Licenses\frmLocalDrivingLicenseApplicationInfo.Designer.cs">
+      <DependentUpon>frmLocalDrivingLicenseApplicationInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Global Classes\clsCurrentUser.cs" />
     <Compile Include="Global Classes\clsUtil.cs" />
@@ -138,41 +168,56 @@
     <Compile Include="TestForm.Designer.cs">
       <DependentUpon>TestForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="User\ctrlUserCard.cs">
+    <Compile Include="Users\ctrlUserCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="User\ctrlUserCard.Designer.cs">
+    <Compile Include="Users\ctrlUserCard.Designer.cs">
       <DependentUpon>ctrlUserCard.cs</DependentUpon>
     </Compile>
-    <Compile Include="User\frmAddEditUser.cs">
+    <Compile Include="Users\frmAddEditUser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="User\frmAddEditUser.Designer.cs">
+    <Compile Include="Users\frmAddEditUser.Designer.cs">
       <DependentUpon>frmAddEditUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="User\frmChangePassword.cs">
+    <Compile Include="Users\frmChangePassword.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="User\frmChangePassword.Designer.cs">
+    <Compile Include="Users\frmChangePassword.Designer.cs">
       <DependentUpon>frmChangePassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="User\frmListUsers.cs">
+    <Compile Include="Users\frmListUsers.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="User\frmListUsers.Designer.cs">
+    <Compile Include="Users\frmListUsers.Designer.cs">
       <DependentUpon>frmListUsers.cs</DependentUpon>
     </Compile>
-    <Compile Include="User\frmUserInfo.cs">
+    <Compile Include="Users\frmUserInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="User\frmUserInfo.Designer.cs">
+    <Compile Include="Users\frmUserInfo.Designer.cs">
       <DependentUpon>frmUserInfo.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Application Types\frmApplicationTypes.resx">
+    <EmbeddedResource Include="Applications\Application Types\frmApplicationTypes.resx">
       <DependentUpon>frmApplicationTypes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Application Types\frmEditApplicationTypes.resx">
+    <EmbeddedResource Include="Applications\Application Types\frmEditApplicationTypes.resx">
       <DependentUpon>frmEditApplicationTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\Controls\ctrlBasicApplicationInfo.resx">
+      <DependentUpon>ctrlBasicApplicationInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\Local Driving Licenses\ctrlLDLAppInfo.resx">
+      <DependentUpon>ctrlLDLAppInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\Local Driving Licenses\frmAddEditLocalDrivinglicenseApplication.resx">
+      <DependentUpon>frmAddEditLocalDrivinglicenseApplication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\Local Driving Licenses\frmListLocalDrivingLicensesApplications.resx">
+      <DependentUpon>frmListLocalDrivingLicensesApplications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\Local Driving Licenses\frmLocalDrivingLicenseApplicationInfo.resx">
+      <DependentUpon>frmLocalDrivingLicenseApplicationInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
@@ -215,19 +260,19 @@
     <EmbeddedResource Include="TestForm.resx">
       <DependentUpon>TestForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User\ctrlUserCard.resx">
+    <EmbeddedResource Include="Users\ctrlUserCard.resx">
       <DependentUpon>ctrlUserCard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User\frmAddEditUser.resx">
+    <EmbeddedResource Include="Users\frmAddEditUser.resx">
       <DependentUpon>frmAddEditUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User\frmChangePassword.resx">
+    <EmbeddedResource Include="Users\frmChangePassword.resx">
       <DependentUpon>frmChangePassword.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User\frmListUsers.resx">
+    <EmbeddedResource Include="Users\frmListUsers.resx">
       <DependentUpon>frmListUsers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User\frmUserInfo.resx">
+    <EmbeddedResource Include="Users\frmUserInfo.resx">
       <DependentUpon>frmUserInfo.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
@@ -379,6 +424,31 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Login\LoginInfo.txt" />
+    <None Include="Resources\PassedTests 32.png" />
+    <None Include="Resources\License Type 32.png" />
+    <None Include="Resources\PersonLicenseHistory 32.png" />
+    <None Include="Resources\License View 32.png" />
+    <None Include="Resources\IssueDrivingLicense 32.png" />
+    <None Include="Resources\Schedule Test 32.png" />
+    <None Include="Resources\Delete 32 2.png" />
+    <None Include="Resources\User 32 -2.png" />
+    <None Include="Resources\New Application 64.png" />
+    <None Include="Resources\Detain 32.png" />
+    <None Include="Resources\Release Detained License 32.png" />
+    <None Include="Resources\LocalDriving License.png" />
+    <None Include="Resources\International 32.png" />
+    <None Include="Resources\Local 32.png" />
+    <None Include="Resources\Retake Test 32.png" />
+    <None Include="Resources\New Driving License 32.png" />
+    <None Include="Resources\Detained Driving License 321.png" />
+    <None Include="Resources\Renew Driving License 32.png" />
+    <None Include="Resources\Test Type 64.png" />
+    <None Include="Resources\Detain 64.png" />
+    <None Include="Resources\Manage Applications 64.png" />
+    <None Include="Resources\Application Types 64.png" />
+    <None Include="Resources\Driver License 48.png" />
+    <None Include="Resources\Detained Driving License 32.png" />
+    <None Include="Resources\Damaged Driving License 32.png" />
     <None Include="Resources\TestType 512.png" />
     <None Include="Resources\edit 321.png" />
     <None Include="Resources\money 32.png" />

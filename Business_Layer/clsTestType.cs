@@ -10,13 +10,14 @@ namespace Business_Layer
 {
     public class clsTestType
     {
-        public int TestTypeID;
+        public enum enTestType { VisionTest = 1, WrittenTest = 2, StreetTest = 3 };
+        public enTestType TestTypeID;
         public string Title;
         public string Description;
         public decimal Fees;
 
 
-        public clsTestType(int TestTypeID, string Title, string Description, decimal Fees)
+        public clsTestType(enTestType TestTypeID, string Title, string Description, decimal Fees)
         {
             this.TestTypeID = TestTypeID;
             this.Title = Title;
@@ -24,17 +25,14 @@ namespace Business_Layer
             this.Fees = Fees;
         }
 
-        public static clsTestType FindTestType(int TestTypeID)
+        public static clsTestType FindTestType(enTestType TestTypeID)
         {
             string Title = string.Empty;
             string Description = string.Empty;
             decimal Fees = -1;
 
-            if (clsTestTypeDataAccess.FindTestType(TestTypeID, ref Title, ref Description, ref Fees))
-            {
-                return new clsTestType(TestTypeID, Title, Description, Fees);
-            }
-
+            if (clsTestTypeDataAccess.FindTestType((int)TestTypeID, ref Title, ref Description, ref Fees))
+                return new clsTestType((enTestType)TestTypeID, Title, Description, Fees);
             else
                 return null;
 
@@ -42,9 +40,9 @@ namespace Business_Layer
 
         public bool UpdateTestType()
         {
-            return clsTestTypeDataAccess.UpdateTestType(this.TestTypeID, this.Title, this.Description, this.Fees);
+            return clsTestTypeDataAccess.UpdateTestType((int)this.TestTypeID, this.Title, this.Description, this.Fees);
         }
-
+        
 
         public static DataTable GetAllTestTypeDataTable()
         {

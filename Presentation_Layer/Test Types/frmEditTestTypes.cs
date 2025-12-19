@@ -7,10 +7,10 @@ namespace Presentation_Layer.Test_Types
 {
     public partial class frmEditTestTypes : Form
     {
-        private int _TestTypeID = -1;
+        private clsTestType.enTestType _TestTypeID  ;
         private clsTestType _TestType;
 
-        public frmEditTestTypes(int testTypeID)
+        public frmEditTestTypes(clsTestType.enTestType testTypeID)
         {
             InitializeComponent();
             _TestTypeID = testTypeID;
@@ -19,7 +19,7 @@ namespace Presentation_Layer.Test_Types
         private void frmEditTestTypes_Load(object sender, EventArgs e)
         {
             // Load the test type
-            _TestType = clsTestType.FindTestType(_TestTypeID);
+            _TestType = clsTestType.FindTestType((_TestTypeID));
             lblApplicationTypeID.Text = _TestTypeID.ToString();
 
             if (_TestType != null)

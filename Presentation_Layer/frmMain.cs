@@ -1,5 +1,8 @@
-﻿using Presentation_Layer.Global_Classes;
+﻿using Presentation_Layer.Application_Types;
+using Presentation_Layer.Applications.Local_Driving_Licenses;
+using Presentation_Layer.Global_Classes;
 using Presentation_Layer.Login;
+using Presentation_Layer.Test_Types;
 using Presentation_Layer.User;
 using Presentation_Layer.User_Forms;
 using System;
@@ -62,6 +65,24 @@ namespace Presentation_Layer
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void manageTestTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmTestTypes frm = new frmTestTypes();
+            frm.Show();
+        }
+
+        private void manageApplicaionTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmApplicationTypes frm = new frmApplicationTypes();
+            frm.Show();
+        }
+
+        private void localLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddEditLocalDrivinglicenseApplication frm = new frmAddEditLocalDrivinglicenseApplication();
+            frm.ShowDialog();
         }
     }
 }

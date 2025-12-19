@@ -10,24 +10,31 @@ namespace Business_Layer
 {
     public class clsApplicationType
     {
-        public int ApplicationTypeID;
+        public enum enApplicationTypes
+        {
+            NewLocalDrivingLicenseService = 1, RenewDrivingLicenseService, ReplacementforaLostDrivingLicense,
+            ReplacementforaDamagedDrivingLicense, ReleaseDetainedDrivingLicsense, NewInternationalLicense, RetakeTest
+        };
+
+
+        public enApplicationTypes ApplicationTypeID;
         public string Title;
         public decimal Fees;
 
 
-        public clsApplicationType(int ApplicationTypeID, string Title, decimal Fees)
+        public clsApplicationType(enApplicationTypes ApplicationTypeID, string Title, decimal Fees)
         {
             this.ApplicationTypeID = ApplicationTypeID;
             this.Title = Title;
             this.Fees = Fees;
         }
 
-        public static clsApplicationType FindApplicationType(int AppTypeID)
+        public static clsApplicationType FindApplicationType(enApplicationTypes AppTypeID)
         {
             string Title = string.Empty;
             decimal Fees = -1;
 
-            if (clsApplicationTypeDataAccess.FindApplicationType(AppTypeID, ref Title, ref Fees))
+            if (clsApplicationTypeDataAccess.FindApplicationType((int)AppTypeID, ref Title, ref Fees))
             {
                 return new clsApplicationType(AppTypeID, Title, Fees);
             }
@@ -39,7 +46,7 @@ namespace Business_Layer
 
         public bool UpdateApplicationType()
         {
-            return clsApplicationTypeDataAccess.UpdateApplicationType(this.ApplicationTypeID, this.Title, this.Fees);
+            return clsApplicationTypeDataAccess.UpdateApplicationType((int)this.ApplicationTypeID, this.Title, this.Fees);
         }
 
         

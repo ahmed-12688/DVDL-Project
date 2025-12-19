@@ -18,6 +18,7 @@ namespace Business_Layer
         public string SecondName { get; set; }
         public string ThirdName { get; set; }
         public string LastName { get; set; }
+        public string FullName { get; set; }
         public DateTime DateOfBirth { get; set; }
         public byte Gender { get; set; }
         public string Address { get; set; }
@@ -38,6 +39,7 @@ namespace Business_Layer
             this.SecondName = SecondName;
             this.ThirdName = ThirdName;
             this.LastName = LastName;
+            this.FullName = string.Format($"{FirstName} {SecondName} {ThirdName} {LastName}");
             this.DateOfBirth = DateOfBirth;
             this.Gender = Gender;
             this.Address = Address;
