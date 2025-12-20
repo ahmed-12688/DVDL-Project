@@ -14,6 +14,7 @@ namespace Business_Layer
 
         public int ApplicationID { get; set; }
         public int ApplicantPersonID { get; set; }
+        public clsPerson PersonInfo { get; set; }
         public DateTime ApplicationDate { get; set; }
         public int ApplicationTypeID { get; set; }
         public clsApplicationType ApplicationTypeInfo;
@@ -33,6 +34,7 @@ namespace Business_Layer
         {
             this.ApplicationID = ApplicationID;
             this.ApplicantPersonID = ApplicantPersonID;
+            this.PersonInfo = clsPerson.FindPerson(ApplicantPersonID);
             this.ApplicationDate = ApplicationDate;
             this.ApplicationTypeID = ApplicationTypeID;
             this.ApplicationTypeInfo = clsApplicationType.FindApplicationType((clsApplicationType.enApplicationTypes)ApplicationTypeID);

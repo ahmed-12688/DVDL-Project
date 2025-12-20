@@ -59,7 +59,7 @@ namespace Presentation_Layer.Applications.Controls
             _AppID = _Application.ApplicationID;
             lblApplicationID.Text = _Application.ApplicationID.ToString();
             lblFees.Text = _Application.PaidFees.ToString();
-            lblApplicant.Text = clsPerson.FindPerson(_Application.ApplicantPersonID).FullName;
+            lblApplicant.Text =_Application.PersonInfo.FullName;
             lblDate.Text = _Application.ApplicationDate.ToString("dd/MM/yyyy");
             lblStatusDate.Text = _Application.LastStatusDate.ToString("dd/MM/yyyy");
             lblType.Text = ((clsApplicationType.enApplicationTypes)_Application.ApplicationTypeID).ToString();

@@ -178,7 +178,7 @@ namespace Presentation_Layer.Applications.Local_Driving_Licenses
             //    return;
             //}
 
-            _LDLApp.ApplicantPersonID = ctrlPersonCardWithFilter1.PersonID; ;
+            _LDLApp.ApplicantPersonID = ctrlPersonCardWithFilter1.PersonID; 
             _LDLApp.ApplicationDate = DateTime.Now;
             _LDLApp.ApplicationTypeID = 1;
             _LDLApp.ApplicationStatus = 1;

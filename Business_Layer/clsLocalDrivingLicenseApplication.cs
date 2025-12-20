@@ -1,12 +1,6 @@
 ﻿using DataAccess_Layer;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business_Layer
 {
@@ -15,7 +9,6 @@ namespace Business_Layer
         public enum enMode { Addnew, Update }
 
         public int LDLAppID { get; set; }
-        public int ApplicationID { get; set; }
         public int LicenseClassID { get; set; }
         public clsLicenseClass LicenseClassInfo;
 
@@ -23,7 +16,7 @@ namespace Business_Layer
         {
             get
             {
-                return clsPerson.FindPerson(ApplicantPersonID).FullName;
+                return base.PersonInfo.FullName;
             }
 
         }
@@ -38,20 +31,13 @@ namespace Business_Layer
             this.Mode = enMode.Addnew;
         }
 
-        public clsLocalDrivingLicenseApplication(int LDLAppID, int ApplicationID, int ApplicantPersonID,
+        private clsLocalDrivingLicenseApplication(int LDLAppID, int ApplicationID, int ApplicantPersonID,
             DateTime ApplicationDate, int ApplicationTypeID,
              byte ApplicationStatus, DateTime LastStatusDate,
              decimal PaidFees, int CreatedByUserID, int LicenseClassID)
+            : base(ApplicationID, ApplicantPersonID, ApplicationDate, ApplicationTypeID, ApplicationStatus, LastStatusDate, PaidFees, CreatedByUserID)
         {
             this.LDLAppID = LDLAppID;
-            this.ApplicationID = ApplicationID;
-            this.ApplicantPersonID = ApplicantPersonID;
-            this.ApplicationDate = ApplicationDate;
-            this.ApplicationTypeID = ApplicationTypeID;
-            this.ApplicationStatus = ApplicationStatus;
-            this.LastStatusDate = LastStatusDate;
-            this.PaidFees = PaidFees;
-            this.CreatedByUserID = CreatedByUserID;
             this.LicenseClassID = LicenseClassID;
             this.Mode = enMode.Update;
         }
@@ -88,7 +74,7 @@ namespace Business_Layer
             int LicenseClassID = -1;
 
             bool IsFound = clsLocalDrivingLicenseApplicationDataAccess.FindLocalDrivingLicenseApplicationsAppID
-                (ApplicationID, ref LDLAppID , ref LicenseClassID);
+                (ApplicationID, ref LDLAppID, ref LicenseClassID);
 
 
             if (IsFound)
@@ -136,7 +122,7 @@ namespace Business_Layer
 
         private bool _AddNewLocalDrivingLicenseApplication()
         {
-            
+
             this.LDLAppID = clsLocalDrivingLicenseApplicationDataAccess.AddNewLocalDrivingLicenseApplications(this.ApplicationID, this.LicenseClassID);
             return (this.LDLAppID != -1);
         }
