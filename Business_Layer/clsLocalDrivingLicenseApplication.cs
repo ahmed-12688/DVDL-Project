@@ -1,6 +1,7 @@
 ﻿using DataAccess_Layer;
 using System;
 using System.Data;
+using System.Net.Http.Headers;
 
 namespace Business_Layer
 {
@@ -39,6 +40,7 @@ namespace Business_Layer
         {
             this.LDLAppID = LDLAppID;
             this.LicenseClassID = LicenseClassID;
+            this.LicenseClassInfo = clsLicenseClass.Find(LicenseClassID);
             this.Mode = enMode.Update;
         }
 
@@ -160,6 +162,47 @@ namespace Business_Layer
             }
             return false;
         }
+
+        public byte TotalTrails(clsTestType.enTestType type)
+        {
+            return clsLocalDrivingLicenseApplicationDataAccess.TotalTrialsPerTest(this.LDLAppID, (int)type);
+        }
+
+        public byte NumberOfPassedTests()
+        {
+            return clsLocalDrivingLicenseApplicationDataAccess.NumberOfPassedTests(this.LDLAppID);
+        }
+
+        public bool DoesPassTestType(clsTestType.enTestType type)
+        {
+            return clsLocalDrivingLicenseApplicationDataAccess.DoesPassTestType(this.LDLAppID, (int)type);
+        }
+
+        public bool DoesAttendTestType(clsTestType.enTestType type)
+        {
+            return clsLocalDrivingLicenseApplicationDataAccess.DoesAttendTestType(this.LDLAppID, (int)type);
+        }
+
+        public static bool DoesPassAllTests(int LDLAppID)
+        {
+            return clsLocalDrivingLicenseApplicationDataAccess.DoesPassAllTests(LDLAppID);
+        }
+
+        public bool CompleteAllTests()
+        {
+            return clsLocalDrivingLicenseApplicationDataAccess.CompleteAllTests(this.ApplicationID);
+        }
+
+        public bool IsLicenseIssued()
+        {
+            return clsLocalDrivingLicenseApplicationDataAccess.IsLicenseIssuee(this.LDLAppID);
+        }
+
+        public static bool IsLicenseIssued(int LDLAppID)
+        {
+            return clsLocalDrivingLicenseApplicationDataAccess.IsLicenseIssuee(LDLAppID);
+        }
+
 
     }
 }

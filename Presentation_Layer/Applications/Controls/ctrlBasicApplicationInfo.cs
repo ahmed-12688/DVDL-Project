@@ -79,6 +79,8 @@ namespace Presentation_Layer.Applications.Controls
                 default:
                     break;
             }
+
+            llViewPersonInfo.Enabled = true;
         }
 
         public void ResetApplicationInfo()

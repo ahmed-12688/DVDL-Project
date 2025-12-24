@@ -42,11 +42,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsApplicationDataAccess.cs" />
+    <Compile Include="clsDriverDataAccess.cs" />
     <Compile Include="clsLicenseClassDataAccess.cs" />
+    <Compile Include="clsLicenseDataAccess.cs" />
     <Compile Include="clsLocalDrivingLicenseApplicationDataAccess.cs" />
     <Compile Include="clsPersonDataAccess.cs" />
     <Compile Include="clsDataAccessSettings.cs" />
     <Compile Include="clsCountriesDataAccess.cs" />
+    <Compile Include="clsTestAppointmentDataAccess.cs" />
+    <Compile Include="clsTestDataAccess.cs" />
     <Compile Include="clsTestTypeDataAccess.cs" />
     <Compile Include="clsUserDataAccess.cs" />
     <Compile Include="clsApplicationTypeDataAccess.cs" />

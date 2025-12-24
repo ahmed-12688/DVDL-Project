@@ -71,6 +71,7 @@
             // llShowLicenceInfo
             // 
             this.llShowLicenceInfo.AutoSize = true;
+            this.llShowLicenceInfo.Enabled = false;
             this.llShowLicenceInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.llShowLicenceInfo.Location = new System.Drawing.Point(66, 79);
             this.llShowLicenceInfo.Name = "llShowLicenceInfo";

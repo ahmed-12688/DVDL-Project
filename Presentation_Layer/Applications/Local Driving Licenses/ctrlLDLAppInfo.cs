@@ -1,4 +1,5 @@
 ﻿using Business_Layer;
+using Presentation_Layer.Licenses.Local_Licesnse;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +16,17 @@ namespace Presentation_Layer.Applications.Local_Driving_Licenses
     {
         private int _LDLAppID = -1;
         private clsLocalDrivingLicenseApplication _LDLApp;
-        private int _LicenseID;
+        private bool _llShowLicenceInfo_Enabled = false;
+       
+        public bool LicenceInfoEnabled
+        {
+            get { return _llShowLicenceInfo_Enabled; }
+            set
+            {
+                _llShowLicenceInfo_Enabled=value;
+                llShowLicenceInfo.Enabled= _llShowLicenceInfo_Enabled;
+            }
+        }
 
         public int LDLAppID { get { return _LDLAppID; } }
         public ctrlLDLAppInfo()
@@ -38,10 +49,9 @@ namespace Presentation_Layer.Applications.Local_Driving_Licenses
             ctrlBasicApplicationInfo1.LoadApplicationData(_LDLApp.ApplicationID);
             lblLocalDrivingLicenseApplicationID.Text = _LDLApp.LDLAppID.ToString();
             lblAppliedFor.Text = clsLicenseClass.Find(_LDLApp.LicenseClassID).ClassName;
-            lblPassedTests.Text = "??????";
+            lblPassedTests.Text = string.Format($"{_LDLApp.NumberOfPassedTests()}/3");
             
         }
-
 
         private void _ResetLocalDrivingLicenseApplicationInfo()
         {
@@ -53,10 +63,13 @@ namespace Presentation_Layer.Applications.Local_Driving_Licenses
 
         }
 
-
         private void llShowLicenceInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            MessageBox.Show("This Feture NOT impelemnted yet !","Message",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            int id = clsLicense.FindLicenseByApplicationID(
+                (clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(_LDLAppID).ApplicationID)).LicenseID;
+            frmLicenseInfo frm = new frmLicenseInfo(id);
+            frm.ShowDialog();
         }
+
     }
 }

@@ -63,7 +63,7 @@ namespace DataAccess_Layer
                             if (reader.Read())
                             {
                                 IsFound = true;
-                                LDLAppID = (int)reader["LDLAppID"];
+                                LDLAppID = (int)reader["LocalDrivingLicenseApplicationID"];
                                 LicenseClassID = (int)reader["LicenseClassID"];
                             }
                             else
@@ -203,12 +203,11 @@ namespace DataAccess_Layer
             return dt;
         }
 
-        /*
-         *         public static bool DoesPassTestType( int LocalDrivingLicenseApplicationID, int TestTypeID)
+        public static bool DoesPassTestType(int LocalDrivingLicenseApplicationID, int TestTypeID)
 
         {
-           
-             
+
+
             bool Result = false;
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
@@ -241,7 +240,7 @@ namespace DataAccess_Layer
 
             catch (Exception ex)
             {
-                //Console.WriteLine("Error: " + ex.Message);
+                Console.WriteLine("Error: " + ex.Message);
 
             }
 
@@ -252,6 +251,13 @@ namespace DataAccess_Layer
 
             return Result;
 
+        }
+
+        public static bool DoesPassAllTests(int LocalDrivingLicenseApplicationID)
+        {
+            return (DoesPassTestType(LocalDrivingLicenseApplicationID,1)
+                && DoesPassTestType(LocalDrivingLicenseApplicationID, 2)
+                && DoesPassTestType(LocalDrivingLicenseApplicationID, 3));
         }
 
         public static bool DoesAttendTestType(int LocalDrivingLicenseApplicationID, int TestTypeID)
@@ -283,7 +289,7 @@ namespace DataAccess_Layer
 
                 object result = command.ExecuteScalar();
 
-                if (result != null )
+                if (result != null)
                 {
                     IsFound = true;
                 }
@@ -291,7 +297,7 @@ namespace DataAccess_Layer
 
             catch (Exception ex)
             {
-                //Console.WriteLine("Error: " + ex.Message);
+                Console.WriteLine("Error: " + ex.Message);
 
             }
 
@@ -341,7 +347,7 @@ namespace DataAccess_Layer
 
             catch (Exception ex)
             {
-                //Console.WriteLine("Error: " + ex.Message);
+                Console.WriteLine("Error: " + ex.Message);
 
             }
 
@@ -353,7 +359,98 @@ namespace DataAccess_Layer
             return TotalTrialsPerTest;
 
         }
-         */ //test functions
+
+        public static byte NumberOfPassedTests(int LocalDrivingLicenseApplicationID)
+
+        {
+
+
+            byte TotalTrialsPerTest = 0;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @" select count(*) 
+                        FROM TestAppointments INNER JOIN
+                  Tests ON TestAppointments.TestAppointmentID = Tests.TestAppointmentID
+				  where TestAppointments.LocalDrivingLicenseApplicationID =  @LocalDrivingLicenseApplicationID
+				  And TestResult =1
+                       ";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
+
+            try
+            {
+                connection.Open();
+
+                object result = command.ExecuteScalar();
+
+                if (result != null && byte.TryParse(result.ToString(), out byte Trials))
+                {
+                    TotalTrialsPerTest = Trials;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+
+            }
+
+            finally
+            {
+                connection.Close();
+            }
+
+            return TotalTrialsPerTest;
+
+        }
+
+        public static bool CompleteAllTests(int AppID)
+
+        {
+
+
+            bool IsFound = false;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @" Update Applications set ApplicationStatus = 3 where ApplicationID = @AppID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@AppID", AppID);
+
+            try
+            {
+                connection.Open();
+
+                object result = command.ExecuteScalar();
+
+                if (result != null)
+                {
+                    IsFound = true;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+
+            }
+
+            finally
+            {
+                connection.Close();
+            }
+
+            return IsFound;
+
+        }
+
+
+        //test functions
 
         public static bool IsLocalDrivingLicenseApplicationsExist(int LDLAppID)
         {
@@ -384,6 +481,41 @@ namespace DataAccess_Layer
             }
 
         }
+
+        public static bool IsLicenseIssuee(int LDLAppID)
+        {
+            try
+            {
+
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                {
+                    string query = @"SELECT found = 1
+                            FROM     Licenses INNER JOIN
+                             Applications ON Licenses.ApplicationID = Applications.ApplicationID INNER JOIN
+                             LocalDrivingLicenseApplications ON Applications.ApplicationID = LocalDrivingLicenseApplications.ApplicationID
+                             where LocalDrivingLicenseApplicationID = @LDLAppID and IsActive = 1";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@LDLAppID", LDLAppID);
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                return true;
+                            }
+                            return false;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+        }
+
 
     }
 }

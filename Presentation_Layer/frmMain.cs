@@ -1,5 +1,6 @@
 ﻿using Presentation_Layer.Application_Types;
 using Presentation_Layer.Applications.Local_Driving_Licenses;
+using Presentation_Layer.Drivers;
 using Presentation_Layer.Global_Classes;
 using Presentation_Layer.Login;
 using Presentation_Layer.Test_Types;
@@ -83,6 +84,19 @@ namespace Presentation_Layer
         {
             frmAddEditLocalDrivinglicenseApplication frm = new frmAddEditLocalDrivinglicenseApplication();
             frm.ShowDialog();
+        }
+
+        private void driversToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListDrivers frm = new frmListDrivers();
+            frm.ShowDialog();
+        }
+
+        private void localDrivingLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListLocalDrivingLicensesApplications frm = new frmListLocalDrivingLicensesApplications();
+            frm.ShowDialog();
+
         }
     }
 }

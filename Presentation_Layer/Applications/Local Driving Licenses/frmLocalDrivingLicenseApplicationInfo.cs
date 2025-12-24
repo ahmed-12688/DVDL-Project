@@ -23,6 +23,8 @@ namespace Presentation_Layer.Applications.Local_Driving_Licenses
 
         private void frmLocalDrivingLicenseApplicationInfo_Load(object sender, EventArgs e)
         {
+            if(clsLocalDrivingLicenseApplication.IsLicenseIssued(_LDLAppID))
+                ctrlLDLAppInfo1.LicenceInfoEnabled = true;
             ctrlLDLAppInfo1.LoadLDLAppInfo(_LDLAppID);
         }
 

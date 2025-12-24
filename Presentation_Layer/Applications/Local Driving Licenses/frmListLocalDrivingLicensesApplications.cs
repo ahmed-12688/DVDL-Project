@@ -1,4 +1,6 @@
 ﻿using Business_Layer;
+using Presentation_Layer.Licenses.Local_Licesnse;
+using Presentation_Layer.Tests;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -202,6 +204,94 @@ namespace Presentation_Layer.Applications.Local_Driving_Licenses
                     MessageBox.Show("Could not cancel applicatoin.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void visionTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmTestApplintment frm = new frmTestApplintment((int)dgvLDLApps.CurrentRow.Cells[0].Value, clsTestType.enTestType.VisionTest);
+            frm.ShowDialog();
+            _RefreshLDLAppsList();
+        }
+
+        private void writtenTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmTestApplintment frm = new frmTestApplintment((int)dgvLDLApps.CurrentRow.Cells[0].Value, clsTestType.enTestType.WrittenTest);
+            frm.ShowDialog();
+            _RefreshLDLAppsList();
+        }
+
+        private void streetTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int id = (int)dgvLDLApps.CurrentRow.Cells[0].Value;
+            frmTestApplintment frm = new frmTestApplintment(id, clsTestType.enTestType.StreetTest);
+            frm.ShowDialog();
+            if(clsLocalDrivingLicenseApplication.DoesPassAllTests(id))
+                clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(id).CompleteAllTests();
+            _RefreshLDLAppsList();
+        }
+
+        private void cmsLDLApps_Opening(object sender, CancelEventArgs e)
+        {
+            int LocalDrivingLicenseApplicationID = (int)dgvLDLApps.CurrentRow.Cells[0].Value;
+            clsLocalDrivingLicenseApplication LocalDrivingLicenseApplication =
+                    clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID
+                                                    (LocalDrivingLicenseApplicationID);
+
+            int TotalPassedTests = (int)dgvLDLApps.CurrentRow.Cells[5].Value;
+
+            bool LicenseExists = LocalDrivingLicenseApplication.IsLicenseIssued();
+
+            //Enabled only if person passed all tests and Does not have license. 
+            issuToolStripMenuItem.Enabled = (TotalPassedTests == 3) && !LicenseExists;
+
+            //////showApplicationDetailsToolStripMenuItem.Enabled = LicenseExists;
+            editApplicationToolStripMenuItem.Enabled = !LicenseExists && (LocalDrivingLicenseApplication.ApplicationStatus == 1);
+            scheduleTestToolStripMenuItem.Enabled = !LicenseExists;
+
+            //Enable/Disable Cancel Menue Item
+            //We only canel the applications with status=new.
+            cancelApplicationToolStripMenuItem.Enabled = (LocalDrivingLicenseApplication.ApplicationStatus == 1);
+
+            //Enable/Disable Delete Menue Item
+            //We only allow delete incase the application status is new not complete or Cancelled.
+            deleteApplicationToolStripMenuItem.Enabled =
+                (LocalDrivingLicenseApplication.ApplicationStatus == 1);
+
+
+
+            //Enable Disable Schedule menue and it's sub menue
+            bool PassedVisionTest = LocalDrivingLicenseApplication.DoesPassTestType(clsTestType.enTestType.VisionTest); ;
+            bool PassedWrittenTest = LocalDrivingLicenseApplication.DoesPassTestType(clsTestType.enTestType.WrittenTest);
+            bool PassedStreetTest = LocalDrivingLicenseApplication.DoesPassTestType(clsTestType.enTestType.StreetTest);
+
+            scheduleTestToolStripMenuItem.Enabled = (!PassedVisionTest || !PassedWrittenTest || !PassedStreetTest) && (LocalDrivingLicenseApplication.ApplicationStatus == 1);
+
+            if (scheduleTestToolStripMenuItem.Enabled)
+            {
+                //To Allow Schdule vision test, Person must not passed the same test before.
+                visionTestToolStripMenuItem.Enabled = !PassedVisionTest;
+
+                //To Allow Schdule written test, Person must pass the vision test and must not passed the same test before.
+                writtenTestToolStripMenuItem.Enabled = PassedVisionTest && !PassedWrittenTest;
+
+                //To Allow Schdule steet test, Person must pass the vision * written tests, and must not passed the same test before.
+                streetTestToolStripMenuItem.Enabled = PassedVisionTest && PassedWrittenTest && !PassedStreetTest;
+
+            }
+        }
+
+        private void issuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmIssueLocalLicense frm = new frmIssueLocalLicense((int)dgvLDLApps.CurrentRow.Cells[0].Value);
+            frm.ShowDialog();
+        }
+
+        private void showLiceneseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int id = clsLicense.FindLicenseByApplicationID(
+                (clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID((int)dgvLDLApps.CurrentRow.Cells[0].Value).ApplicationID)).LicenseID;
+            frmLicenseInfo frm = new frmLicenseInfo(id);
+            frm.ShowDialog();
         }
     }
 }
