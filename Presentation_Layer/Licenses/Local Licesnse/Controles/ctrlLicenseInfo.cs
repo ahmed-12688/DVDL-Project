@@ -50,6 +50,7 @@ namespace Presentation_Layer.Licenses.Controles
             lblDateOfBirth.Text = license.PersonInfo.DateOfBirth.ToString("dd/MM/yyyy");
             lblDriverID.Text = license.DriverID.ToString();
             lblExpirationDate.Text = license.ExpirationDate.ToString("dd/MM/yyyy");
+            lblIsDetained.Text = license.IsLiceseDetained() ? "Yes" : "No";
 
             pbPersonImage.Image = (string.IsNullOrEmpty(license.PersonInfo.ImagePath)) ? (license.PersonInfo.Gender == 0) ?
                 Properties.Resources.Male_512 : Properties.Resources.Female_512 :Image.FromFile(license.PersonInfo.ImagePath);

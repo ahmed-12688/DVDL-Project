@@ -68,7 +68,7 @@ namespace Presentation_Layer.Applications.International_License
             lblExpirationDate.Text = DateTime.Now.AddYears(1).ToString("dd/MM/yyyy");
             lblFees.Text = ((int)clsApplicationType.FindApplicationType
                 (clsApplicationType.enApplicationTypes.NewInternationalLicense).Fees).ToString();
-            lblCreatedByUser.Text = "Ahmed12";                 //clsCurrentUser.User.UserName;
+            lblCreatedByUser.Text = clsCurrentUser.User.UserName;
         }
 
         private void btnIssue_Click(object sender, EventArgs e)
@@ -79,10 +79,10 @@ namespace Presentation_Layer.Applications.International_License
             }
 
 
-            int AppID = _License.CreateInternationalApplication(1 /*clsCurrentUser.User.UserID*/);
+            int AppID = _License.CreateInternationalApplication(clsCurrentUser.User.UserID);
             if (AppID == -1)
                 return;
-            _interLicenseID = _License.IssueInternationalLicense(AppID, 1 /*clsCurrentUser.User.UserID*/);
+            _interLicenseID = _License.IssueInternationalLicense(AppID, clsCurrentUser.User.UserID);
             if (_interLicenseID == -1)
                 return;
             MessageBox.Show("International License Issued Successfully with ID=" + _interLicenseID.ToString(), "License Issued", MessageBoxButtons.OK, MessageBoxIcon.Information);

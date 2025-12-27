@@ -1,4 +1,5 @@
 ﻿using Business_Layer;
+using Presentation_Layer.Global_Classes;
 using Presentation_Layer.Licenses;
 using Presentation_Layer.Licenses.Local_Licesnse;
 using System;
@@ -28,7 +29,7 @@ namespace Presentation_Layer.Applications.Replace_Lost_Or_Damaged_License
         {
             ctrlLicenseInfoWithFilter1.txtLicenseIDFocus();
             lblApplicationDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
-            lblCreatedByUser.Text = "Ahmed12";                   // clsCurrentUser.User.UserName;
+            lblCreatedByUser.Text = clsCurrentUser.User.UserName;
 
             lblApplicationFees.Text = rbDamaged.Checked ?
             clsApplicationType.FindApplicationType(clsApplicationType.enApplicationTypes.ReplacementforaDamagedDrivingLicense).Fees.ToString() :
@@ -109,7 +110,7 @@ namespace Presentation_Layer.Applications.Replace_Lost_Or_Damaged_License
             application.PaidFees = rbDamaged.Checked ?
                 clsApplicationType.FindApplicationType(clsApplicationType.enApplicationTypes.ReplacementforaDamagedDrivingLicense).Fees :
                 clsApplicationType.FindApplicationType(clsApplicationType.enApplicationTypes.ReplacementforaLostDrivingLicense).Fees;
-            application.CreatedByUserID = 1;                              // clsCurrentUser.User.UserID;
+            application.CreatedByUserID = clsCurrentUser.User.UserID;
 
             if (!application.Save())
             {
@@ -131,7 +132,7 @@ namespace Presentation_Layer.Applications.Replace_Lost_Or_Damaged_License
                 clsLicense.enIssueReason.ReplacementforDamaged :
                 clsLicense.enIssueReason.ReplacementforLost;
 
-            newlicense.CreatedByUserID = 1;                              //clsCurrentUser.User.UserID;
+            newlicense.CreatedByUserID = clsCurrentUser.User.UserID;
 
             if (newlicense.Save())
             {

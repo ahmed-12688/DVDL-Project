@@ -48,7 +48,7 @@ namespace Presentation_Layer.Licenses.Local_Licesnse
             license.PaidFees = LDLApp.LicenseClassInfo.ClassFees;
             license.IsActive = true;
             license.IssueReason = clsLicense.enIssueReason.FirstTime;
-            license.CreatedByUserID = 1;                                //clsCurrentUser.User.UserID;
+            license.CreatedByUserID = clsCurrentUser.User.UserID;
 
             if(license.Save())
             {

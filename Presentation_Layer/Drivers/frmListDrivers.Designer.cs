@@ -56,6 +56,7 @@
             this.label3.Size = new System.Drawing.Size(86, 16);
             this.label3.TabIndex = 28;
             this.label3.Text = "# Records :";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // cmsDrivers
             // 
@@ -65,7 +66,8 @@
             this.IssueinternationalLincenseToolStripMenuItem,
             this.ShowPersonLicenseHistoryToolStripMenuItem});
             this.cmsDrivers.Name = "cmsLDLApps";
-            this.cmsDrivers.Size = new System.Drawing.Size(281, 146);
+            this.cmsDrivers.Size = new System.Drawing.Size(281, 118);
+            this.cmsDrivers.Opening += new System.ComponentModel.CancelEventHandler(this.cmsDrivers_Opening);
             // 
             // showPersonInfoToolStripMenuItem
             // 
@@ -129,6 +131,7 @@
             this.label2.Size = new System.Drawing.Size(76, 16);
             this.label2.TabIndex = 25;
             this.label2.Text = "Filter By : ";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // lblRecordsNumber
             // 
@@ -138,6 +141,7 @@
             this.lblRecordsNumber.Name = "lblRecordsNumber";
             this.lblRecordsNumber.Size = new System.Drawing.Size(0, 16);
             this.lblRecordsNumber.TabIndex = 23;
+            this.lblRecordsNumber.Click += new System.EventHandler(this.lblRecordsNumber_Click);
             // 
             // label1
             // 
@@ -149,6 +153,7 @@
             this.label1.Size = new System.Drawing.Size(296, 42);
             this.label1.TabIndex = 22;
             this.label1.Text = "Manage Drivers";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // dgvDrivers
             // 
@@ -165,6 +170,7 @@
             this.dgvDrivers.RowTemplate.Height = 24;
             this.dgvDrivers.Size = new System.Drawing.Size(1379, 359);
             this.dgvDrivers.TabIndex = 20;
+            this.dgvDrivers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDrivers_CellContentClick);
             // 
             // pictureBox1
             // 
@@ -175,6 +181,7 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 21;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // btnClose
             // 

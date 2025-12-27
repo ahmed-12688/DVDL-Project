@@ -39,7 +39,7 @@ namespace Presentation_Layer.Tests.Controls
             test.TestAppointmentID = _TestAppID;
             test.TestResult = rbPass.Checked;
             test.Notes = txtNotes.Text;
-            test.CreatedByUserID = 1;                              //clsCurrentUser.User.UserID;
+            test.CreatedByUserID = clsCurrentUser.User.UserID;
 
             if(test.Save())
             {

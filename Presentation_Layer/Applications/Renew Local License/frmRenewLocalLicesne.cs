@@ -30,7 +30,7 @@ namespace Presentation_Layer.Applications.Renew_Local_License
             ctrlLicenseInfoWithFilter1.txtLicenseIDFocus();
             lblApplicationDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
             lblIssueDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
-            lblCreatedByUser.Text = "Ahmed12";                   // clsCurrentUser.User.UserName;
+            lblCreatedByUser.Text = clsCurrentUser.User.UserName;
         }
 
         private void ctrlLicenseInfoWithFilter1_OnLicenseSelected(int obj)
@@ -79,7 +79,7 @@ namespace Presentation_Layer.Applications.Renew_Local_License
             application.ApplicationStatus = 3;
             application.LastStatusDate = DateTime.Now;
             application.PaidFees = clsApplicationType.FindApplicationType(clsApplicationType.enApplicationTypes.RenewDrivingLicenseService).Fees;
-            application.CreatedByUserID = 1;                              // clsCurrentUser.User.UserID;
+            application.CreatedByUserID = clsCurrentUser.User.UserID;
 
             if (!application.Save())
             {
@@ -98,7 +98,7 @@ namespace Presentation_Layer.Applications.Renew_Local_License
             newlicense.PaidFees = _oldlicense.LicenseClassInfo.ClassFees;
             newlicense.IsActive = true;
             newlicense.IssueReason = clsLicense.enIssueReason.Renew;
-            newlicense.CreatedByUserID = 1;                              //clsCurrentUser.User.UserID;
+            newlicense.CreatedByUserID = clsCurrentUser.User.UserID;
 
             if(newlicense.Save())
             {

@@ -83,7 +83,7 @@ namespace Presentation_Layer.Applications.Local_Driving_Licenses
                 cbLicenseClass.SelectedIndex = 2;
                 lblFees.Text = clsApplicationType.FindApplicationType(clsApplicationType.enApplicationTypes.NewLocalDrivingLicenseService).Fees.ToString();
                 lblApplicationDate.Text = DateTime.Now.ToShortDateString();
-                lblCreatedByUser.Text = "Ahmed12";                      //clsCurrentUser.User.UserName;
+                lblCreatedByUser.Text = clsCurrentUser.User.UserName;
             }
             else
             {
@@ -184,7 +184,7 @@ namespace Presentation_Layer.Applications.Local_Driving_Licenses
             _LDLApp.ApplicationStatus = 1;
             _LDLApp.LastStatusDate = DateTime.Now;
             _LDLApp.PaidFees = Convert.ToDecimal(lblFees.Text);
-            _LDLApp.CreatedByUserID = 1;                           //clsCurrentUser.User.UserID;
+            _LDLApp.CreatedByUserID = clsCurrentUser.User.UserID;
             _LDLApp.LicenseClassID = LicenseClassID;
 
 

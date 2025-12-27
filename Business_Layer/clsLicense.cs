@@ -24,6 +24,8 @@ namespace Business_Layer
         public enIssueReason IssueReason { get; set; }
         public int CreatedByUserID { get; set; }
 
+        public clsDetainedLicense DetainedLicense { get; set; }
+
         public enMode Mode;
 
 
@@ -44,6 +46,7 @@ namespace Business_Layer
             this.IsActive = IsActive;
             this.IssueReason = IssueReason;
             this.CreatedByUserID = CreatedByUserID;
+            this.DetainedLicense = clsDetainedLicense.FindByLicenseID(LicenseID);
             this.Mode = enMode.Update;
         }
 
@@ -221,6 +224,33 @@ namespace Business_Layer
         public bool DeActiveLicense()
         {
             return clsLicenseDataAccess.DeActiveLicense(this.LicenseID);
+        }
+
+        public bool IsLiceseDetained()
+        {
+            return clsDetainedLicense.IsLiceseDetained(this.LicenseID);
+        }
+
+        public int ReleaseDetain(int CreateBy)
+        {
+            clsApplication app = new clsApplication();
+            app.ApplicantPersonID = this.PersonInfo.PersonID;
+            app.ApplicationDate = DateTime.Now;
+            app.ApplicationTypeID = (int)clsApplicationType.enApplicationTypes.ReleaseDetainedDrivingLicsense;
+            app.ApplicationStatus = 3;
+            app.LastStatusDate = DateTime.Now;
+            app.PaidFees = clsApplicationType.FindApplicationType(clsApplicationType.enApplicationTypes.ReleaseDetainedDrivingLicsense).Fees;
+            app.CreatedByUserID = CreateBy;
+            if(app.Save())
+            {
+                if (DetainedLicense.Release(CreateBy, app.ApplicationID))
+                    return app.ApplicationID;
+                else
+                    return -1;
+
+            }
+            else
+                return -1;
         }
   
     }

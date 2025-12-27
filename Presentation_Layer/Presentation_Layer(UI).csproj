@@ -104,6 +104,18 @@
     <Compile Include="Applications\Local Driving Licenses\frmLocalDrivingLicenseApplicationInfo.Designer.cs">
       <DependentUpon>frmLocalDrivingLicenseApplicationInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Applications\Release Detained License\frmListDetainedLicenses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\Release Detained License\frmListDetainedLicenses.Designer.cs">
+      <DependentUpon>frmListDetainedLicenses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\Release Detained License\frmReleaseDetainedLicense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\Release Detained License\frmReleaseDetainedLicense.Designer.cs">
+      <DependentUpon>frmReleaseDetainedLicense.cs</DependentUpon>
+    </Compile>
     <Compile Include="Applications\Renew Local License\frmRenewLocalLicesne.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,6 +141,12 @@
     </Compile>
     <Compile Include="Licenses\Controles\ctrlLicenseHistory.Designer.cs">
       <DependentUpon>ctrlLicenseHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Licenses\Detain License\frmDetainLicense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Licenses\Detain License\frmDetainLicense.Designer.cs">
+      <DependentUpon>frmDetainLicense.cs</DependentUpon>
     </Compile>
     <Compile Include="Licenses\frmShowLicenseHistory.cs">
       <SubType>Form</SubType>
@@ -333,6 +351,12 @@
     <EmbeddedResource Include="Applications\Local Driving Licenses\frmLocalDrivingLicenseApplicationInfo.resx">
       <DependentUpon>frmLocalDrivingLicenseApplicationInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Applications\Release Detained License\frmListDetainedLicenses.resx">
+      <DependentUpon>frmListDetainedLicenses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\Release Detained License\frmReleaseDetainedLicense.resx">
+      <DependentUpon>frmReleaseDetainedLicense.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Applications\Renew Local License\frmRenewLocalLicesne.resx">
       <DependentUpon>frmRenewLocalLicesne.cs</DependentUpon>
     </EmbeddedResource>
@@ -344,6 +368,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Licenses\Controles\ctrlLicenseHistory.resx">
       <DependentUpon>ctrlLicenseHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Licenses\Detain License\frmDetainLicense.resx">
+      <DependentUpon>frmDetainLicense.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Licenses\frmShowLicenseHistory.resx">
       <DependentUpon>frmShowLicenseHistory.cs</DependentUpon>
@@ -586,6 +613,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Login\LoginInfo.txt" />
+    <None Include="Resources\Release Detained License 64.png" />
+    <None Include="Resources\Detain 512.png" />
     <None Include="Resources\Renew Driving License 321.png" />
     <None Include="Resources\PersonLicenseHistory 512.png" />
     <None Include="Resources\LicenseView 400.png" />

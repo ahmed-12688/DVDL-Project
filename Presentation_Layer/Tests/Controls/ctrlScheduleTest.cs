@@ -179,7 +179,7 @@ namespace Presentation_Layer.Tests.Controls
                     application.ApplicationStatus = 3;
                     application.LastStatusDate = DateTime.Now;
                     application.PaidFees = clsApplicationType.FindApplicationType((clsApplicationType.enApplicationTypes)application.ApplicationTypeID).Fees;
-                    application.CreatedByUserID = 1;                      // clsCurrentUser.User.UserID;
+                    application.CreatedByUserID = clsCurrentUser.User.UserID;
                     if (!application.Save())
                     {
                         MessageBox.Show("Can't Complete retake test application", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -193,7 +193,7 @@ namespace Presentation_Layer.Tests.Controls
                 Testapp.LDLAppID = _LDLAppID;
                 Testapp.AppointmentDate = dtpTestDate.Value;
                 Testapp.PaidFees = Convert.ToDecimal(lblFees.Text);
-                Testapp.CreatedByUserID = 1;             //clsCurrentUser.User.UserID;
+                Testapp.CreatedByUserID = clsCurrentUser.User.UserID;
                 Testapp.IsLocked = false;
                 if (_RetakeAppID > 0)
                     Testapp.RetakeTestApplicationID = _RetakeAppID;

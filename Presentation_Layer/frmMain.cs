@@ -1,10 +1,12 @@
 ﻿using Presentation_Layer.Application_Types;
 using Presentation_Layer.Applications.International_License;
 using Presentation_Layer.Applications.Local_Driving_Licenses;
+using Presentation_Layer.Applications.Release_Detained_License;
 using Presentation_Layer.Applications.Renew_Local_License;
 using Presentation_Layer.Applications.Replace_Lost_Or_Damaged_License;
 using Presentation_Layer.Drivers;
 using Presentation_Layer.Global_Classes;
+using Presentation_Layer.Licenses.Detain_License;
 using Presentation_Layer.Login;
 using Presentation_Layer.Test_Types;
 using Presentation_Layer.User;
@@ -130,6 +132,30 @@ namespace Presentation_Layer
         private void replaceOrLostOrToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmReplaceLostOrDamagedLicense frm = new frmReplaceLostOrDamagedLicense();
+            frm.ShowDialog();
+        }
+
+        private void detainLicenseToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmDetainLicense frm = new frmDetainLicense();
+            frm.ShowDialog();
+        }
+
+        private void releaseDetainedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReleaseDetainedLicense frm = new frmReleaseDetainedLicense();
+            frm.ShowDialog();
+        }
+
+        private void releaseDetaiendDrivingLicesnsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReleaseDetainedLicense frm = new frmReleaseDetainedLicense();
+            frm.ShowDialog();
+        }
+
+        private void manageDetainedLicensesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListDetainedLicenses frm = new frmListDetainedLicenses();
             frm.ShowDialog();
         }
     }

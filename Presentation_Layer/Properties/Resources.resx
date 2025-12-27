@@ -121,6 +121,9 @@
   <data name="TestType 512" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TestType 512.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Detain 512" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Detain 512.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Schedule Test 321" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Schedule Test 321.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -310,6 +313,9 @@
   <data name="Female 512" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Female 512.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Renew Driving License 321" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Renew Driving License 321.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Vision 512" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Vision 512.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -376,7 +382,7 @@
   <data name="Street Test 32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Street Test 32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Renew Driving License 321" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Renew Driving License 321.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Release Detained License 64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Release Detained License 64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
