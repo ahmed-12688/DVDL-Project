@@ -2,6 +2,7 @@
 using Presentation_Layer.Applications.International_License;
 using Presentation_Layer.Applications.Local_Driving_Licenses;
 using Presentation_Layer.Applications.Renew_Local_License;
+using Presentation_Layer.Applications.Replace_Lost_Or_Damaged_License;
 using Presentation_Layer.Drivers;
 using Presentation_Layer.Global_Classes;
 using Presentation_Layer.Login;
@@ -123,6 +124,12 @@ namespace Presentation_Layer
         private void reNewDrivingLicensesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmRenewLocalLicesne frm = new frmRenewLocalLicesne();
+            frm.ShowDialog();
+        }
+
+        private void replaceOrLostOrToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReplaceLostOrDamagedLicense frm = new frmReplaceLostOrDamagedLicense();
             frm.ShowDialog();
         }
     }

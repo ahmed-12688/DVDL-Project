@@ -190,7 +190,7 @@ namespace Business_Layer
             application.ApplicantPersonID = this.PersonInfo.PersonID;
             application.ApplicationDate = DateTime.Now;
             application.ApplicationTypeID = (int)clsApplicationType.enApplicationTypes.NewInternationalLicense;
-            application.ApplicationStatus = 1;
+            application.ApplicationStatus = 3;
             application.LastStatusDate = DateTime.Now;
             application.PaidFees = clsApplicationType.FindApplicationType
                 (clsApplicationType.enApplicationTypes.NewInternationalLicense).Fees;

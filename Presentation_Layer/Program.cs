@@ -15,6 +15,7 @@ using Presentation_Layer.Applications.International_License;
 using Presentation_Layer.Licenses.International_License;
 using Presentation_Layer.Licenses;
 using Presentation_Layer.Applications.Renew_Local_License;
+using Presentation_Layer.Applications.Replace_Lost_Or_Damaged_License;
 
 
 namespace Presentation_Layer
@@ -29,7 +30,7 @@ namespace Presentation_Layer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmRenewLocalLicesne());
+            Application.Run(new frmLogin());
         }
     }
 }

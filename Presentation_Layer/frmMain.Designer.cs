@@ -171,6 +171,7 @@
             this.replaceOrLostOrToolStripMenuItem.Name = "replaceOrLostOrToolStripMenuItem";
             this.replaceOrLostOrToolStripMenuItem.Size = new System.Drawing.Size(557, 38);
             this.replaceOrLostOrToolStripMenuItem.Text = "Replacement For Lost Or Damaged Licesne";
+            this.replaceOrLostOrToolStripMenuItem.Click += new System.EventHandler(this.replaceOrLostOrToolStripMenuItem_Click);
             // 
             // toolStripSeparator6
             // 

@@ -76,7 +76,7 @@ namespace Presentation_Layer.Applications.Renew_Local_License
             application.ApplicantPersonID = _oldlicense.PersonInfo.PersonID;
             application.ApplicationDate = DateTime.Now;
             application.ApplicationTypeID = (int)clsApplicationType.enApplicationTypes.RenewDrivingLicenseService;
-            application.ApplicationStatus = 1;
+            application.ApplicationStatus = 3;
             application.LastStatusDate = DateTime.Now;
             application.PaidFees = clsApplicationType.FindApplicationType(clsApplicationType.enApplicationTypes.RenewDrivingLicenseService).Fees;
             application.CreatedByUserID = 1;                              // clsCurrentUser.User.UserID;

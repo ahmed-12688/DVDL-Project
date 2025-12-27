@@ -176,7 +176,7 @@ namespace Presentation_Layer.Tests.Controls
                     application.ApplicantPersonID = _PersonID;
                     application.ApplicationDate = DateTime.Now;
                     application.ApplicationTypeID = (int)clsApplicationType.enApplicationTypes.RetakeTest;
-                    application.ApplicationStatus = 1;
+                    application.ApplicationStatus = 3;
                     application.LastStatusDate = DateTime.Now;
                     application.PaidFees = clsApplicationType.FindApplicationType((clsApplicationType.enApplicationTypes)application.ApplicationTypeID).Fees;
                     application.CreatedByUserID = 1;                      // clsCurrentUser.User.UserID;
