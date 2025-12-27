@@ -24,7 +24,7 @@ namespace Presentation_Layer.Drivers
 
         private void _RefreshDriversList()
         {
-            _Drivers = clsDriver.GetAllDrivers();
+             _Drivers = clsDriver.GetAllDrivers();
             dgvDrivers.DataSource = _Drivers;
             lblRecordsNumber.Text = dgvDrivers.RowCount.ToString();
         }
