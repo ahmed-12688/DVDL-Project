@@ -1,4 +1,6 @@
 ﻿using Business_Layer;
+using Presentation_Layer.Applications.International_License;
+using Presentation_Layer.Licenses;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -131,21 +133,23 @@ namespace Presentation_Layer.Drivers
                 e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
 
-        private void showApplicationDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void showPersonInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmPersonDetails frm = new frmPersonDetails((int)dgvDrivers.CurrentRow.Cells[1].Value);
             frm.ShowDialog();
         }
 
-        private void editApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ShowPersonLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Not Impelemented Yet");
+            frmShowLicenseHistory frm = new frmShowLicenseHistory((int)dgvDrivers.CurrentRow.Cells[0].Value);
+            frm.ShowDialog();
         }
 
-        private void deleteApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        private void IssueinternationalLincenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Not Impelemented Yet");
-
+            frmNewInternationalApplication frm = new frmNewInternationalApplication();
+            frm.ShowDialog();
         }
     }
 }

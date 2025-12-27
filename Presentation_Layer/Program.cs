@@ -11,6 +11,10 @@ using System.Windows.Forms;
 using Presentation_Layer.Tests;
 using Presentation_Layer.Tests.Controls;
 using Presentation_Layer.Drivers;
+using Presentation_Layer.Applications.International_License;
+using Presentation_Layer.Licenses.International_License;
+using Presentation_Layer.Licenses;
+using Presentation_Layer.Applications.Renew_Local_License;
 
 
 namespace Presentation_Layer
@@ -19,13 +23,13 @@ namespace Presentation_Layer
     {
         /// <summary>
         /// The main entry point for the application.
-        /// </summary>
+        /// </summary>  
         [STAThread]
         static void Main()  
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmListLocalDrivingLicensesApplications());
+            Application.Run(new frmRenewLocalLicesne());
         }
     }
 }

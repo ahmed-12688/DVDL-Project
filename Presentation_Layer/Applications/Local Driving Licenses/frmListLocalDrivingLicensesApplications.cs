@@ -1,4 +1,5 @@
 ﻿using Business_Layer;
+using Presentation_Layer.Licenses;
 using Presentation_Layer.Licenses.Local_Licesnse;
 using Presentation_Layer.Tests;
 using System;
@@ -45,7 +46,7 @@ namespace Presentation_Layer.Applications.Local_Driving_Licenses
                 dgvLDLApps.Columns[1].Width = 200;
 
                 dgvLDLApps.Columns[2].HeaderText = "National No";
-                dgvLDLApps.Columns[2].Width = 100;
+                dgvLDLApps.Columns[2].Width = 90;
 
                 dgvLDLApps.Columns[3].HeaderText = "Full Name";
                 dgvLDLApps.Columns[3].Width = 250;
@@ -54,7 +55,7 @@ namespace Presentation_Layer.Applications.Local_Driving_Licenses
                 dgvLDLApps.Columns[4].Width = 150;
 
                 dgvLDLApps.Columns[5].HeaderText = "Passed Tests";
-                dgvLDLApps.Columns[5].Width = 90;
+                dgvLDLApps.Columns[5].Width = 100;
 
             }
 
@@ -168,7 +169,7 @@ namespace Presentation_Layer.Applications.Local_Driving_Licenses
 
             if (LocalDrivingLicenseApplication != null)
             {
-                if (LocalDrivingLicenseApplication.DeleteApplcation())
+                if (LocalDrivingLicenseApplication.DeleteLocalDrivingLicenseApplication())
                 {
                     MessageBox.Show("Application Deleted Successfully.", "Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     //refresh the form again.
@@ -291,6 +292,14 @@ namespace Presentation_Layer.Applications.Local_Driving_Licenses
             int id = clsLicense.FindLicenseByApplicationID(
                 (clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID((int)dgvLDLApps.CurrentRow.Cells[0].Value).ApplicationID)).LicenseID;
             frmLicenseInfo frm = new frmLicenseInfo(id);
+            frm.ShowDialog();
+        }
+
+        private void showPersonLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int id = clsDriver.FindDriverByPersonID(clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID
+                ((int)dgvLDLApps.CurrentRow.Cells[0].Value).ApplicantPersonID).DriverID;
+            frmShowLicenseHistory frm = new frmShowLicenseHistory(id);
             frm.ShowDialog();
         }
     }

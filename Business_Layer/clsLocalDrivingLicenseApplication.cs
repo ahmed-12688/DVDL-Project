@@ -97,6 +97,12 @@ namespace Business_Layer
 
         }
 
+        public bool DeleteLocalDrivingLicenseApplication()
+        {
+            return DeleteLocalDrivingLicenseApplication(this.LDLAppID);
+        }
+
+
         public bool DeleteLocalDrivingLicenseApplication(int LDLAppID)
         {
             bool IsLocalDrivingApplicationDeleted = false;

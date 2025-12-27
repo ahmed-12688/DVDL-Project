@@ -28,20 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ctrlLicenseInfo1 = new Presentation_Layer.Licenses.Controles.ctrlLicenseInfo();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
+            this.ctrlLicenseInfo1 = new Presentation_Layer.Licenses.Controles.ctrlLicenseInfo();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // ctrlLicenseInfo1
-            // 
-            this.ctrlLicenseInfo1.License = null;
-            this.ctrlLicenseInfo1.Location = new System.Drawing.Point(12, 214);
-            this.ctrlLicenseInfo1.Name = "ctrlLicenseInfo1";
-            this.ctrlLicenseInfo1.Size = new System.Drawing.Size(1022, 342);
-            this.ctrlLicenseInfo1.TabIndex = 0;
             // 
             // pictureBox1
             // 
@@ -60,7 +52,7 @@
             this.label1.ForeColor = System.Drawing.Color.Firebrick;
             this.label1.Location = new System.Drawing.Point(370, 160);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(320, 39);
+            this.label1.Size = new System.Drawing.Size(308, 38);
             this.label1.TabIndex = 2;
             this.label1.Text = "Driver License Info";
             // 
@@ -80,15 +72,23 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // ctrlLicenseInfo1
+            // 
+            this.ctrlLicenseInfo1.License = null;
+            this.ctrlLicenseInfo1.Location = new System.Drawing.Point(12, 214);
+            this.ctrlLicenseInfo1.Name = "ctrlLicenseInfo1";
+            this.ctrlLicenseInfo1.Size = new System.Drawing.Size(1022, 342);
+            this.ctrlLicenseInfo1.TabIndex = 74;
+            // 
             // frmLicenseInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1044, 614);
+            this.Controls.Add(this.ctrlLicenseInfo1);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.ctrlLicenseInfo1);
             this.Name = "frmLicenseInfo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "License Details";
@@ -101,9 +101,9 @@
 
         #endregion
 
-        private Controles.ctrlLicenseInfo ctrlLicenseInfo1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnClose;
+        private Licenses.Controles.ctrlLicenseInfo ctrlLicenseInfo1;
     }
 }

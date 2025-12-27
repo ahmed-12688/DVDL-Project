@@ -16,6 +16,7 @@ namespace Presentation_Layer.Licenses.Controles
         private int _LicenseID;
 
         public clsLicense License {  get; set; }
+        public int LicenseID { get { return _LicenseID; } }
         public ctrlLicenseInfo()
         {
             InitializeComponent();

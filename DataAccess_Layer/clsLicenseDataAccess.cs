@@ -300,6 +300,66 @@ namespace DataAccess_Layer
             }
         }
 
+        public static bool IsLicesneIsAvtiveAndHisTypeis_Class3_(int LicenseID)
+        {
+            try
+            {
+                using (SqlConnection connection =
+                    new SqlConnection(clsDataAccessSettings.ConnectionString))
+                {
+                    string query =
+                        @"select top 1 found = 1 from 
+                        Licenses where LicenseID = @LicenseID 
+                        And LicenseClass = 3
+                        And IsActive = 1 And ExpirationDate > GETDATE()";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@LicenseID", LicenseID);
+                        connection.Open();
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            return reader.HasRows;
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        static public bool DeActiveLicense(int LicenseID)
+        {
+            int RowsAffected = 0;
+
+            try
+            {
+                using (SqlConnection connection =
+                    new SqlConnection(clsDataAccessSettings.ConnectionString))
+                {
+                    string query = "Update Licenses Set IsActive = 0 WHERE LicenseID = @LicenseID";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@LicenseID", LicenseID);
+                        connection.Open();
+                        RowsAffected = command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+
+            return RowsAffected > 0;
+        }
+
+
+
 
     }
 

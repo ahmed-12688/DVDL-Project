@@ -108,7 +108,7 @@ namespace Presentation_Layer.Tests.Controls
 
 
             lblLocalDrivingLicenseAppID.Text = LDLApp.LDLAppID.ToString();
-            lblDrivingClass.Text = clsLicenseClass.Find(LDLApp.LicenseClassID).ClassName;
+            lblDrivingClass.Text = LDLApp.LicenseClassInfo.ClassName;
             lblFullName.Text = LDLApp.PersonFullName;
             lblTrial.Text = LDLApp.TotalTrails(_TestType).ToString();
             lblFees.Text = clsTestType.FindTestType(_TestType).Fees.ToString();

@@ -273,6 +273,102 @@ namespace DataAccess_Layer
                 return false;
             }
         }
+
+        public static bool IsDriverHasActiveInternationalLicense(int DriverID)
+        {
+            try
+            {
+                using (SqlConnection connection =
+                    new SqlConnection(clsDataAccessSettings.ConnectionString))
+                {
+                    string query =
+                        "SELECT found = 1 FROM InternationalLicenses WHERE DriverID = @DriverID";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@DriverID", DriverID);
+                        connection.Open();
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            return reader.HasRows;
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
+
+        public static DataTable GetAllLocalLicenseForDriver(int DriverID)
+        {
+            DataTable dt = new DataTable();
+
+            try
+            {
+                using (SqlConnection connection =
+                    new SqlConnection(clsDataAccessSettings.ConnectionString))
+                {
+                    string query = @"SELECT Licenses.LicenseID, Licenses.ApplicationID, LicenseClasses.ClassName, 
+                                        Licenses.IssueDate, Licenses.ExpirationDate, Licenses.IsActive
+                                        FROM LicenseClasses INNER JOIN Licenses ON LicenseClasses.LicenseClassID 
+                                            = Licenses.LicenseClass WHERE Licenses.DriverID = @DriverID ";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@DriverID", DriverID);
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                                dt.Load(reader);
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                return null;
+            }
+
+            return dt;
+        }
+
+        public static DataTable GetAllInternationalLicenseForDriver(int DriverID)
+        {
+            DataTable dt = new DataTable();
+
+            try
+            {
+                using (SqlConnection connection =
+                    new SqlConnection(clsDataAccessSettings.ConnectionString))
+                {
+                    string query = @"SELECT InternationalLicenseID, ApplicationID, IssuedUsingLocalLicenseID, 
+                                        IssueDate, ExpirationDate, IsActive
+                                        FROM     InternationalLicenses where DriverID = @DriverID ";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@DriverID", DriverID);
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                                dt.Load(reader);
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                return null;
+            }
+
+            return dt;
+        }
+
+
     }
 
 

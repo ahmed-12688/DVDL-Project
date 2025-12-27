@@ -10,6 +10,7 @@ namespace Business_Layer
 
         public int DriverID { get; set; }
         public int PersonID { get; set; }
+        public clsPerson PersonInfo { get; set; }
         public int CreatedByUserID { get; set; }
         public DateTime CreatedDate { get; set; }
 
@@ -20,6 +21,7 @@ namespace Business_Layer
         {
             this.DriverID = DriverID;
             this.PersonID = PersonID;
+            this.PersonInfo = clsPerson.FindPerson(PersonID);
             this.CreatedByUserID = CreatedByUserID;
             this.CreatedDate = CreatedDate;
 
@@ -126,5 +128,21 @@ namespace Business_Layer
             }
             return false;
         }
+
+        public static bool IsDriverHasActiveInternationalLicense(int DriverID)
+        {
+            return clsDriverDataAccess.IsDriverHasActiveInternationalLicense(DriverID);
+        }
+
+        public static DataTable GetAllLocalLicenseForDriver(int DriverID)
+        {
+            return clsDriverDataAccess.GetAllLocalLicenseForDriver(DriverID);
+        }
+
+        public static DataTable GetAllInternationalLicenseForDriver(int DriverID)
+        {
+            return clsDriverDataAccess.GetAllInternationalLicenseForDriver(DriverID);
+        }
+
     }
 }

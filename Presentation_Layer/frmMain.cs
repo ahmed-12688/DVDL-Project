@@ -1,5 +1,7 @@
 ﻿using Presentation_Layer.Application_Types;
+using Presentation_Layer.Applications.International_License;
 using Presentation_Layer.Applications.Local_Driving_Licenses;
+using Presentation_Layer.Applications.Renew_Local_License;
 using Presentation_Layer.Drivers;
 using Presentation_Layer.Global_Classes;
 using Presentation_Layer.Login;
@@ -66,6 +68,7 @@ namespace Presentation_Layer
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+            //_frmLogin.Show();
         }
 
         private void manageTestTypesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -97,6 +100,30 @@ namespace Presentation_Layer
             frmListLocalDrivingLicensesApplications frm = new frmListLocalDrivingLicensesApplications();
             frm.ShowDialog();
 
+        }
+
+        private void retakeTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListLocalDrivingLicensesApplications frm = new frmListLocalDrivingLicensesApplications();
+            frm.ShowDialog();
+        }
+
+        private void internaionalLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmNewInternationalApplication frm = new frmNewInternationalApplication();
+            frm.ShowDialog();
+        }
+
+        private void internationalLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListInternationalLicenseApplication frm = new frmListInternationalLicenseApplication();
+            frm.ShowDialog();
+        }
+
+        private void reNewDrivingLicensesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmRenewLocalLicesne frm = new frmRenewLocalLicesne();
+            frm.ShowDialog();
         }
     }
 }

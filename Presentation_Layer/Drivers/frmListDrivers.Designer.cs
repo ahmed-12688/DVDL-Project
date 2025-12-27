@@ -31,9 +31,9 @@
             this.components = new System.ComponentModel.Container();
             this.label3 = new System.Windows.Forms.Label();
             this.cmsDrivers = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.showApplicationDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editApplicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteApplicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showPersonInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.IssueinternationalLincenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ShowPersonLicenseHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.txtDriversFilter = new System.Windows.Forms.TextBox();
             this.cbDriversFilter = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -61,38 +61,38 @@
             // 
             this.cmsDrivers.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cmsDrivers.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.showApplicationDetailsToolStripMenuItem,
-            this.editApplicationToolStripMenuItem,
-            this.deleteApplicationToolStripMenuItem});
+            this.showPersonInfoToolStripMenuItem,
+            this.IssueinternationalLincenseToolStripMenuItem,
+            this.ShowPersonLicenseHistoryToolStripMenuItem});
             this.cmsDrivers.Name = "cmsLDLApps";
-            this.cmsDrivers.Size = new System.Drawing.Size(281, 118);
+            this.cmsDrivers.Size = new System.Drawing.Size(281, 146);
             // 
-            // showApplicationDetailsToolStripMenuItem
+            // showPersonInfoToolStripMenuItem
             // 
-            this.showApplicationDetailsToolStripMenuItem.Image = global::Presentation_Layer.Properties.Resources.PersonDetails_321;
-            this.showApplicationDetailsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.showApplicationDetailsToolStripMenuItem.Name = "showApplicationDetailsToolStripMenuItem";
-            this.showApplicationDetailsToolStripMenuItem.Size = new System.Drawing.Size(280, 38);
-            this.showApplicationDetailsToolStripMenuItem.Text = "Show Person Info";
-            this.showApplicationDetailsToolStripMenuItem.Click += new System.EventHandler(this.showApplicationDetailsToolStripMenuItem_Click);
+            this.showPersonInfoToolStripMenuItem.Image = global::Presentation_Layer.Properties.Resources.PersonDetails_321;
+            this.showPersonInfoToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.showPersonInfoToolStripMenuItem.Name = "showPersonInfoToolStripMenuItem";
+            this.showPersonInfoToolStripMenuItem.Size = new System.Drawing.Size(280, 38);
+            this.showPersonInfoToolStripMenuItem.Text = "Show Person Info";
+            this.showPersonInfoToolStripMenuItem.Click += new System.EventHandler(this.showPersonInfoToolStripMenuItem_Click);
             // 
-            // editApplicationToolStripMenuItem
+            // IssueinternationalLincenseToolStripMenuItem
             // 
-            this.editApplicationToolStripMenuItem.Image = global::Presentation_Layer.Properties.Resources.International_32;
-            this.editApplicationToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.editApplicationToolStripMenuItem.Name = "editApplicationToolStripMenuItem";
-            this.editApplicationToolStripMenuItem.Size = new System.Drawing.Size(280, 38);
-            this.editApplicationToolStripMenuItem.Text = "Issue International License";
-            this.editApplicationToolStripMenuItem.Click += new System.EventHandler(this.editApplicationToolStripMenuItem_Click);
+            this.IssueinternationalLincenseToolStripMenuItem.Image = global::Presentation_Layer.Properties.Resources.International_32;
+            this.IssueinternationalLincenseToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.IssueinternationalLincenseToolStripMenuItem.Name = "IssueinternationalLincenseToolStripMenuItem";
+            this.IssueinternationalLincenseToolStripMenuItem.Size = new System.Drawing.Size(280, 38);
+            this.IssueinternationalLincenseToolStripMenuItem.Text = "Issue International License";
+            this.IssueinternationalLincenseToolStripMenuItem.Click += new System.EventHandler(this.IssueinternationalLincenseToolStripMenuItem_Click);
             // 
-            // deleteApplicationToolStripMenuItem
+            // ShowPersonLicenseHistoryToolStripMenuItem
             // 
-            this.deleteApplicationToolStripMenuItem.Image = global::Presentation_Layer.Properties.Resources.PersonLicenseHistory_32;
-            this.deleteApplicationToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.deleteApplicationToolStripMenuItem.Name = "deleteApplicationToolStripMenuItem";
-            this.deleteApplicationToolStripMenuItem.Size = new System.Drawing.Size(280, 38);
-            this.deleteApplicationToolStripMenuItem.Text = "Show Person License History";
-            this.deleteApplicationToolStripMenuItem.Click += new System.EventHandler(this.deleteApplicationToolStripMenuItem_Click);
+            this.ShowPersonLicenseHistoryToolStripMenuItem.Image = global::Presentation_Layer.Properties.Resources.PersonLicenseHistory_32;
+            this.ShowPersonLicenseHistoryToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.ShowPersonLicenseHistoryToolStripMenuItem.Name = "ShowPersonLicenseHistoryToolStripMenuItem";
+            this.ShowPersonLicenseHistoryToolStripMenuItem.Size = new System.Drawing.Size(280, 38);
+            this.ShowPersonLicenseHistoryToolStripMenuItem.Text = "Show Person License History";
+            this.ShowPersonLicenseHistoryToolStripMenuItem.Click += new System.EventHandler(this.ShowPersonLicenseHistoryToolStripMenuItem_Click);
             // 
             // txtDriversFilter
             // 
@@ -219,9 +219,9 @@
 
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.ToolStripMenuItem deleteApplicationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editApplicationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem showApplicationDetailsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ShowPersonLicenseHistoryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem IssueinternationalLincenseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showPersonInfoToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip cmsDrivers;
         private System.Windows.Forms.TextBox txtDriversFilter;
         private System.Windows.Forms.ComboBox cbDriversFilter;
